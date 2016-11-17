@@ -40,13 +40,13 @@ public class LinkableTextView extends TextView {
     private static Pattern MENTION_PATTERN;
     private static Pattern HASHTAG_PATTERN;
 
-    private boolean mEnabledHashtag = true;
-    private boolean mEnabledMention = true;
-    private boolean mEnabledEmailAddress = true;
-    private boolean mEnabledPhone = true;
-    private boolean mEnabledWebUrl = true;
-    private boolean mEnabledDomainName = true;
-    private boolean mEnabledIpAddress = true;
+    private boolean enabledHashtag = true;
+    private boolean enabledMention = true;
+    private boolean enabledEmailAddress = true;
+    private boolean enabledPhone = true;
+    private boolean enabledWebUrl = true;
+    private boolean enabledDomainName = true;
+    private boolean enabledIpAddress = true;
 
     public LinkableTextView(Context context) {
         super(context);
@@ -72,45 +72,44 @@ public class LinkableTextView extends TextView {
     }
 
     private void initView(Context context, AttributeSet attrs) {
+        String mentionPattern = null;
+        String hashtagPattern = null;
+
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LinkableTextView);
 
         int n = a.getIndexCount();
 
-        String mentionPattern = null;
-        String hashtagPattern = null;
-
         for (int i = 0; i < n; i++) {
             int attr = a.getIndex(i);
 
-            if (attr == R.styleable.LinkableTextView_pattern_mention) {
+            if (attr == R.styleable.LinkableTextView_pattern_mention)
                 mentionPattern = a.getString(attr);
-            } else if (attr == R.styleable.LinkableTextView_pattern_hashtag) {
+            else if (attr == R.styleable.LinkableTextView_pattern_hashtag)
                 hashtagPattern = a.getString(attr);
-            } else if (attr == R.styleable.LinkableTextView_enabledHashtag) {
-                mEnabledHashtag = a.getBoolean(attr, true);
-            } else if (attr == R.styleable.LinkableTextView_enabledMention) {
-                mEnabledMention = a.getBoolean(attr, true);
-            } else if (attr == R.styleable.LinkableTextView_enabledEmail_address) {
-                mEnabledEmailAddress = a.getBoolean(attr, true);
-            } else if (attr == R.styleable.LinkableTextView_enabledPhone) {
-                mEnabledPhone = a.getBoolean(attr, true);
-            } else if (attr == R.styleable.LinkableTextView_enabledWeb_url) {
-                mEnabledWebUrl = a.getBoolean(attr, true);
-            } else if (attr == R.styleable.LinkableTextView_enabledDomain_name) {
-                mEnabledDomainName = a.getBoolean(attr, true);
-            } else if (attr == R.styleable.LinkableTextView_enabledIp_address) {
-                mEnabledIpAddress = a.getBoolean(attr, true);
-            }
+            else if (attr == R.styleable.LinkableTextView_enabledHashtag)
+                enabledHashtag = a.getBoolean(attr, true);
+            else if (attr == R.styleable.LinkableTextView_enabledMention)
+                enabledMention = a.getBoolean(attr, true);
+            else if (attr == R.styleable.LinkableTextView_enabledEmail_address)
+                enabledEmailAddress = a.getBoolean(attr, true);
+            else if (attr == R.styleable.LinkableTextView_enabledPhone)
+                enabledPhone = a.getBoolean(attr, true);
+            else if (attr == R.styleable.LinkableTextView_enabledWeb_url)
+                enabledWebUrl = a.getBoolean(attr, true);
+            else if (attr == R.styleable.LinkableTextView_enabledDomain_name)
+                enabledDomainName = a.getBoolean(attr, true);
+            else if (attr == R.styleable.LinkableTextView_enabledIp_address)
+                enabledIpAddress = a.getBoolean(attr, true);
         }
         setMentionPattern(mentionPattern);
         setHashtagPattern(hashtagPattern);
-        setHashtagEnabled(mEnabledHashtag);
-        setMentionEnabled(mEnabledMention);
-        setEmailAddressEnabled(mEnabledEmailAddress);
-        setPhonEnabled(mEnabledPhone);
-        setWebUrlEnabled(mEnabledWebUrl);
-        setDomainNameEnabled(mEnabledDomainName);
-        setIpAddressEnabled(mEnabledIpAddress);
+        setEnabledHashtag(enabledHashtag);
+        setEnabledMention(enabledMention);
+        setEnabledEmailAddress(enabledEmailAddress);
+        setEnabledPhone(enabledPhone);
+        setEnabledWebUrl(enabledWebUrl);
+        setEnabledDomainName(enabledDomainName);
+        setEnabledIpAddress(enabledIpAddress);
 
         a.recycle();
     }
@@ -139,60 +138,60 @@ public class LinkableTextView extends TextView {
         return HASHTAG_PATTERN;
     }
 
-    public void setHashtagEnabled(boolean enable) {
-        mEnabledHashtag = enable;
+    public boolean isEnabledDomainName() {
+        return enabledDomainName;
     }
 
-    public boolean isHashtagEnabled() {
-        return mEnabledHashtag;
+    public void setEnabledDomainName(boolean enabledDomainName) {
+        this.enabledDomainName = enabledDomainName;
     }
 
-    public void setMentionEnabled(boolean enable) {
-        mEnabledMention = enable;
+    public boolean isEnabledEmailAddress() {
+        return enabledEmailAddress;
     }
 
-    public boolean isMentionEnabled() {
-        return mEnabledMention;
+    public void setEnabledEmailAddress(boolean enabledEmailAddress) {
+        this.enabledEmailAddress = enabledEmailAddress;
     }
 
-    public void setEmailAddressEnabled(boolean enable) {
-        mEnabledEmailAddress = enable;
+    public boolean isEnabledHashtag() {
+        return enabledHashtag;
     }
 
-    public boolean isEmailAddressEnabled() {
-        return mEnabledEmailAddress;
+    public void setEnabledHashtag(boolean enabledHashtag) {
+        this.enabledHashtag = enabledHashtag;
     }
 
-    public void setPhonEnabled(boolean enable) {
-        mEnabledPhone = enable;
+    public boolean isEnabledIpAddress() {
+        return enabledIpAddress;
     }
 
-    public boolean isPhoneEnabled() {
-        return mEnabledPhone;
+    public void setEnabledIpAddress(boolean enabledIpAddress) {
+        this.enabledIpAddress = enabledIpAddress;
     }
 
-    public void setWebUrlEnabled(boolean enable) {
-        mEnabledWebUrl = enable;
+    public boolean isEnabledMention() {
+        return enabledMention;
     }
 
-    public boolean isWebUrlEnabled() {
-        return mEnabledWebUrl;
+    public void setEnabledMention(boolean enabledMention) {
+        this.enabledMention = enabledMention;
     }
 
-    public void setDomainNameEnabled(boolean enable) {
-        mEnabledDomainName = enable;
+    public boolean isEnabledPhone() {
+        return enabledPhone;
     }
 
-    public boolean isDomainNameEnabled() {
-        return mEnabledDomainName;
+    public void setEnabledPhone(boolean enabledPhone) {
+        this.enabledPhone = enabledPhone;
     }
 
-    public void setIpAddressEnabled(boolean enable) {
-        mEnabledIpAddress = enable;
+    public boolean isEnabledWebUrl() {
+        return enabledWebUrl;
     }
 
-    public boolean isIpAddressEnabled() {
-        return mEnabledIpAddress;
+    public void setEnabledWebUrl(boolean enabledWebUrl) {
+        this.enabledWebUrl = enabledWebUrl;
     }
 
     public void addLinks(final OnLinkableClickListener actionHandler) {
@@ -201,37 +200,37 @@ public class LinkableTextView extends TextView {
             public void onMatch(@LinkType int type, String value) {
                 switch (type) {
                     case Link.HASH_TAG: {
-                        if (mEnabledHashtag)
+                        if (enabledHashtag)
                             actionHandler.onHashtagClick(value);
                         break;
                     }
                     case Link.MENTION: {
-                        if (mEnabledMention)
+                        if (enabledMention)
                             actionHandler.onMentionClick(value);
                         break;
                     }
                     case Link.EMAIL_ADDRESS: {
-                        if (mEnabledEmailAddress)
+                        if (enabledEmailAddress)
                             actionHandler.onEmailAddressClick(value);
                         break;
                     }
                     case Link.WEB_URL: {
-                        if (mEnabledWebUrl)
+                        if (enabledWebUrl)
                             actionHandler.onWebUrlClick(value);
                         break;
                     }
                     case Link.PHONE: {
-                        if (mEnabledPhone)
+                        if (enabledPhone)
                             actionHandler.onPhoneClick(value);
                         break;
                     }
                     case Link.DOMAIN_NAME: {
-                        if (mEnabledDomainName)
+                        if (enabledDomainName)
                             actionHandler.onDomainNameClick(value);
                         break;
                     }
                     case Link.IP_ADDRESS: {
-                        if (mEnabledIpAddress)
+                        if (enabledIpAddress)
                             actionHandler.onIpAddressClick(value);
                         break;
                     }
@@ -247,25 +246,25 @@ public class LinkableTextView extends TextView {
             }
         };
 
-        if (mEnabledHashtag)
+        if (enabledHashtag)
             Linkify.addLinks(this, HASHTAG_PATTERN, LinkableMovementMethod.SOCIAL_UI_HASHTAG_SCHEME, null, filter);
 
-        if (mEnabledMention)
+        if (enabledMention)
             Linkify.addLinks(this, MENTION_PATTERN, LinkableMovementMethod.SOCIAL_UI_MENTION_SCHEME, null, filter);
 
-        if (mEnabledEmailAddress)
+        if (enabledEmailAddress)
             Linkify.addLinks(this, Patterns.EMAIL_ADDRESS, null, null, filter);
 
-        if (mEnabledPhone)
+        if (enabledPhone)
             Linkify.addLinks(this, Patterns.PHONE, null, null, filter);
 
-        if (mEnabledWebUrl)
+        if (enabledWebUrl)
             Linkify.addLinks(this, Patterns.WEB_URL, null, null, filter);
 
-        if (mEnabledDomainName)
+        if (enabledDomainName)
             Linkify.addLinks(this, Patterns.DOMAIN_NAME, null, null, filter);
 
-        if (mEnabledIpAddress)
+        if (enabledIpAddress)
             Linkify.addLinks(this, IP_ADDRESS_PATTERN, LinkableMovementMethod.SOCIAL_UI_IP_ADDRESS_SCHEME, null, filter);
 
         MovementMethod movementMethod = null;
