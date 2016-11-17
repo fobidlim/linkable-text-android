@@ -98,12 +98,12 @@ public class ListViewActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onEmailClick(String email) {
+                public void onEmailAddressClick(String email) {
                     Toast.makeText(ListViewActivity.this, "clicked email is " + email, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onUrlClick(String url) {
+                public void onWebUrlClick(String url) {
                     Toast.makeText(ListViewActivity.this, "clicked url is " + url, Toast.LENGTH_SHORT).show();
                 }
 

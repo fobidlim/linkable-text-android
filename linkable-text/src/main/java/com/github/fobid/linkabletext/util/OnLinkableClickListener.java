@@ -9,9 +9,9 @@ public interface OnLinkableClickListener {
 
     void onMentionClick(String mention);
 
-    void onEmailClick(String email);
+    void onEmailAddressClick(String email);
 
-    void onUrlClick(String url);
+    void onWebUrlClick(String url);
 
     void onPhoneClick(String phone);
 

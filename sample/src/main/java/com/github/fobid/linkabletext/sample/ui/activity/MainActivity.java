@@ -64,12 +64,12 @@ public class MainActivity extends AppCompatActivity implements OnLinkableClickLi
     }
 
     @Override
-    public void onEmailClick(String email) {
+    public void onEmailAddressClick(String email) {
         Toast.makeText(this, "clicked email is " + email, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onUrlClick(String url) {
+    public void onWebUrlClick(String url) {
         Toast.makeText(this, "clicked url is " + url, Toast.LENGTH_SHORT).show();
     }
 

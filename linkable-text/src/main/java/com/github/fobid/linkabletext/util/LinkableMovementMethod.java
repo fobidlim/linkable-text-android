@@ -7,7 +7,7 @@ import android.text.style.URLSpan;
 import android.util.Patterns;
 import android.view.MotionEvent;
 
-import com.github.fobid.linkabletext.annotation.Link;
+import com.github.fobid.linkabletext.annotation.LinkType;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
 
 /**
@@ -28,7 +28,7 @@ public class LinkableMovementMethod extends LinkMovementMethod {
         if (linkableCallback == null) {
             mLinkableCallback = new LinkableCallback() {
                 @Override
-                public void onMatch(@Link int type, String value) {
+                public void onMatch(@LinkType int type, String value) {
                 }
             };
         } else {
@@ -80,7 +80,7 @@ public class LinkableMovementMethod extends LinkMovementMethod {
             ip = ip.replaceFirst(".", "");
             mLinkableCallback.onMatch(LinkableTextView.Link.IP_ADDRESS, ip);
         } else if (Patterns.EMAIL_ADDRESS.matcher(link).matches()) {
-            mLinkableCallback.onMatch(LinkableTextView.Link.EMAIL, link);
+            mLinkableCallback.onMatch(LinkableTextView.Link.EMAIL_ADDRESS, link);
         } else if (Patterns.IP_ADDRESS.matcher(link).matches()) {
             mLinkableCallback.onMatch(LinkableTextView.Link.IP_ADDRESS, link);
         } else if (Patterns.PHONE.matcher(link).matches()) {
@@ -88,7 +88,7 @@ public class LinkableMovementMethod extends LinkMovementMethod {
         } else if (Patterns.DOMAIN_NAME.matcher(link).matches()) {
             mLinkableCallback.onMatch(LinkableTextView.Link.DOMAIN_NAME, link);
         } else {
-            mLinkableCallback.onMatch(LinkableTextView.Link.URL, link);
+            mLinkableCallback.onMatch(LinkableTextView.Link.WEB_URL, link);
         }
     }
 }

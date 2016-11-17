@@ -1,11 +1,11 @@
 package com.github.fobid.linkabletext.util;
 
-import com.github.fobid.linkabletext.annotation.Link;
+import com.github.fobid.linkabletext.annotation.LinkType;
 
 /**
  * Created by partner on 2016-11-17.
  */
 
 public interface LinkableCallback {
-    void onMatch(@Link int type, String value);
+    void onMatch(@LinkType int type, String value);
 }

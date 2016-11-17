@@ -12,12 +12,12 @@ import java.lang.annotation.RetentionPolicy;
 @LinkTypeDef({
         LinkableTextView.Link.HASH_TAG,
         LinkableTextView.Link.MENTION,
-        LinkableTextView.Link.EMAIL,
+        LinkableTextView.Link.EMAIL_ADDRESS,
         LinkableTextView.Link.PHONE,
-        LinkableTextView.Link.URL,
+        LinkableTextView.Link.WEB_URL,
         LinkableTextView.Link.DOMAIN_NAME,
         LinkableTextView.Link.IP_ADDRESS
 })
 @Retention(RetentionPolicy.SOURCE)
-public @interface Link {
+public @interface LinkType {
 }

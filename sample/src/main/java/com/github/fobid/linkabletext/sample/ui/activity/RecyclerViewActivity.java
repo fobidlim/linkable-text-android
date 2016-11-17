@@ -78,12 +78,12 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onEmailClick(String email) {
+                public void onEmailAddressClick(String email) {
                     Toast.makeText(RecyclerViewActivity.this, "clicked email is " + email, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onUrlClick(String url) {
+                public void onWebUrlClick(String url) {
                     Toast.makeText(RecyclerViewActivity.this, "clicked url is " + url, Toast.LENGTH_SHORT).show();
                 }
 
