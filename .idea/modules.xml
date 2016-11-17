@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/linkable-text/linkable-text.iml" filepath="$PROJECT_DIR$/linkable-text/linkable-text.iml" />
+      <module fileurl="file://$PROJECT_DIR$/linkable-text-android.iml" filepath="$PROJECT_DIR$/linkable-text-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
+    </modules>
+  </component>
+</project>
