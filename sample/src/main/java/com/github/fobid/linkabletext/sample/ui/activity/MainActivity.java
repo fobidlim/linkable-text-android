@@ -1,10 +1,14 @@
-package com.github.fobid.linkabletext.sample;
+package com.github.fobid.linkabletext.sample.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.github.fobid.linkabletext.sample.R;
 import com.github.fobid.linkabletext.util.OnLinkableClickListener;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
 
@@ -27,6 +31,24 @@ public class MainActivity extends AppCompatActivity implements OnLinkableClickLi
                 "Thank you.";
         textView.setText(text);
         textView.addLinks(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.a_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_listview: {
+                startActivity(new Intent(this, ListViewActivity.class));
+                return true;
+            }
+            default:
+                return true;
+        }
     }
 
     @Override
