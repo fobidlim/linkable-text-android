@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="support-media-compat-24.2.1">
     <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/linkable-text/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/annotations.zip!/" />
       <root url="jar://$PROJECT_DIR$/sample/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>

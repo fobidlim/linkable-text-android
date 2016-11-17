@@ -10,8 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.github.fobid.linkabletext.sample.MainActivity">
 
-    <TextView
+    <com.github.fobid.linkabletext.widget.LinkableTextView
+        android:id="@android:id/text1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_height="wrap_content" />
 </RelativeLayout>
