@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">linkable-text-android</string>
+    <string name="listview">ListView</string>
 </resources>
