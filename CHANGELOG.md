@@ -1,1 +1,3 @@
-
+## 0.1.0
+- This is first public version.
+- `LinkableTextView` supports clickable @mentions, #hashtags, links, emails, phones and ....

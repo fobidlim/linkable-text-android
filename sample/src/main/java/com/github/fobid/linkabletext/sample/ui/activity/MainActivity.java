@@ -8,15 +8,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.github.fobid.linkabletext.sample.R;
 import com.github.fobid.linkabletext.util.OnLinkableClickListener;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements OnLinkableClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.a_main);
 
         LinkableTextView textView = (LinkableTextView) findViewById(android.R.id.text1);
@@ -26,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements OnLinkableClickLi
                 "fobid.me is the domain.\n" +
                 "You can also connect to my #blog on just blog.fobid.me\n" +
                 "You can contact me on #instagram @fobidlim.\n" +
-                "sungtae.lim@partner.so is my email and 010-4421-0228 is my phone number.\n" +
+                "fobidbumz@gmail.com is my email and 010-0000-0000 is my phone number.\n" +
                 "Your IP address is 127.0.0.1\n" +
                 "Thank you.";
         textView.setText(text);
