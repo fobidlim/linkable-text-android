@@ -25,5 +25,9 @@
         <activity
             android:name=".ui.activity.RecyclerViewActivity"
             android:label="@string/recyclerview" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ffb7b7a428a411387def9226e354ff515ab73061" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
