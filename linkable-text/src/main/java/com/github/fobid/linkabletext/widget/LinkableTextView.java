@@ -114,10 +114,6 @@ public class LinkableTextView extends TextView {
         return MENTION_PATTERN;
     }
 
-    public String getMentionPatter() {
-        return MENTION_PATTERN.pattern();
-    }
-
     public void setHashtagPattern(String hashTagPattern) {
         if (!TextUtils.isEmpty(hashTagPattern)) {
             HASHTAG_PATTERN = Pattern.compile(hashTagPattern);
@@ -128,10 +124,6 @@ public class LinkableTextView extends TextView {
 
     public Pattern getHashtagPattern() {
         return HASHTAG_PATTERN;
-    }
-
-    public String getHashtagPattern() {
-        return HASHTAG_PATTERN.pattern();
     }
 
     public void setHashtagEnabled(boolean enable) {
