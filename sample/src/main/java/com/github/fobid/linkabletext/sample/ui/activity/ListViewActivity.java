@@ -35,13 +35,15 @@ public class ListViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mLinkList = new ArrayList<>();
-        mLinkList.add("http://blog.fobid.me is my #blog.");
-        mLinkList.add("fobid.me is the domain.");
-        mLinkList.add("You can also connect to my #blog on just blog.fobid.me");
-        mLinkList.add("You can contact me on #instagram @fobidlim.");
-        mLinkList.add("sungtae.lim@partner.so is my email and 010-4421-0228 is my phone number.");
-        mLinkList.add("Your IP address is 127.0.0.1");
-        mLinkList.add("Thank you.");
+        for (int i = 0; i < 10; i++) {
+            mLinkList.add("#" + (i + 1) + " http://blog.fobid.me is my #blog.");
+            mLinkList.add("fobid.me is the domain.");
+            mLinkList.add("You can also connect to my #blog on just blog.fobid.me");
+            mLinkList.add("You can contact me on #instagram @fobidlim.");
+            mLinkList.add("sungtae.lim@partner.so is my email and 010-4421-0228 is my phone number.");
+            mLinkList.add("Your IP address is 127.0.0.1");
+            mLinkList.add("Thank you.");
+        }
 
         ListView listView = (ListView) findViewById(android.R.id.list);
         LinkableListAdapter adapter = new LinkableListAdapter();
