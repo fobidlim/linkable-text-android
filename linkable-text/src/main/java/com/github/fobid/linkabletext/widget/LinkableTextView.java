@@ -102,7 +102,7 @@ public class LinkableTextView extends TextView {
         a.recycle();
     }
 
-    private void setMentionPattern(String mentionPattern) {
+    public void setMentionPattern(String mentionPattern) {
         if (!TextUtils.isEmpty(mentionPattern)) {
             MENTION_PATTERN = Pattern.compile(mentionPattern);
         } else {
@@ -110,12 +110,28 @@ public class LinkableTextView extends TextView {
         }
     }
 
-    private void setHashtagPattern(String hashTagPattern) {
+    public Pattern getMentionPattern() {
+        return MENTION_PATTERN;
+    }
+
+    public String getMentionPatter() {
+        return MENTION_PATTERN.pattern();
+    }
+
+    public void setHashtagPattern(String hashTagPattern) {
         if (!TextUtils.isEmpty(hashTagPattern)) {
             HASHTAG_PATTERN = Pattern.compile(hashTagPattern);
         } else {
             HASHTAG_PATTERN = Pattern.compile("#([A-Za-z0-9_-]+)");
         }
+    }
+
+    public Pattern getHashtagPattern() {
+        return HASHTAG_PATTERN;
+    }
+
+    public String getHashtagPattern() {
+        return HASHTAG_PATTERN.pattern();
     }
 
     public void setHashtagEnabled(boolean enable) {
