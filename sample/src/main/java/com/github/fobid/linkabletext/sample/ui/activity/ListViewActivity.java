@@ -40,7 +40,7 @@ public class ListViewActivity extends AppCompatActivity {
             mLinkList.add("fobid.me is the domain.");
             mLinkList.add("You can also connect to my #blog on just blog.fobid.me");
             mLinkList.add("You can contact me on #instagram @fobidlim.");
-            mLinkList.add("sungtae.lim@partner.so is my email and 010-4421-0228 is my phone number.");
+            mLinkList.add("fobidbumz@gmail.com is my email and 010-0000-0000 is my phone number.");
             mLinkList.add("Your IP address is 127.0.0.1");
             mLinkList.add("Thank you.");
         }
