@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">linkable-text-android</string>
+    <string name="app_name">Linkable Text Sample</string>
     <string name="listview">ListView</string>
     <string name="recyclerview">RecyclerView</string>
     <string name="menu_overflow">More</string>
