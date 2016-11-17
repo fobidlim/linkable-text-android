@@ -20,7 +20,7 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 
 android {
     signingConfigs {
-        config {
+        release {
             keyAlias properties.getProperty("KEY_ALIAS")
             keyPassword properties.getProperty("KEY_PASSWORD")
             storeFile file(properties.getProperty("KEYSTORE_PATH"))
@@ -39,8 +39,9 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
