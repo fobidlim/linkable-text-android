@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item app:showAsAction="never">
-        <menu>
-            <item
-                android:id="@+id/menu_listview"
-                android:title="@string/listview"
-                app:showAsAction="always" />
-        </menu>
+
+    <item
+        android:title="@string/menu_overflow"
+        app:showAsAction="ifRoom">
+        <item
+            android:id="@+id/menu_listview"
+            android:title="@string/listview"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/menu_recyclerview"
+            android:title="@string/recyclerview"
+            app:showAsAction="never" />
     </item>
+
 </menu>

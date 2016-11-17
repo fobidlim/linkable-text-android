@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -30,6 +31,9 @@ public class ListViewActivity extends AppCompatActivity {
 
         setContentView(R.layout.a_list_view);
 
+        //noinspection ConstantConditions
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mLinkList = new ArrayList<>();
         mLinkList.add("http://blog.fobid.me is my #blog.");
         mLinkList.add("fobid.me is the domain.");
@@ -44,6 +48,11 @@ public class ListViewActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
 
     private class LinkableListAdapter extends BaseAdapter {
 

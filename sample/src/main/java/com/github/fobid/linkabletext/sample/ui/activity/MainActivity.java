@@ -42,10 +42,12 @@ public class MainActivity extends AppCompatActivity implements OnLinkableClickLi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_listview: {
+            case R.id.menu_listview:
                 startActivity(new Intent(this, ListViewActivity.class));
                 return true;
-            }
+            case R.id.menu_recyclerview:
+                startActivity(new Intent(this, RecyclerViewActivity.class));
+                return true;
             default:
                 return true;
         }
