@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.github.fobid.linkabletext.sample.R;
-import com.github.fobid.linkabletext.util.OnLinkClickListener;
+import com.github.fobid.linkabletext.view.OnLinkClickListener;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
 
 import java.util.ArrayList;

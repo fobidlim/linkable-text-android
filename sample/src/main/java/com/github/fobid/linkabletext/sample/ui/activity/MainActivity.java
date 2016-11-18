@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.fobid.linkabletext.sample.R;
-import com.github.fobid.linkabletext.util.OnLinkClickListener;
+import com.github.fobid.linkabletext.view.OnLinkClickListener;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
 
 import io.fabric.sdk.android.Fabric;

@@ -1,4 +1,4 @@
-package com.github.fobid.linkabletext.util;
+package com.github.fobid.linkabletext.view;
 
 /**
  * Created by partner on 2016-11-17.

@@ -14,9 +14,9 @@ import android.widget.TextView;
 
 import com.github.fobid.linkabletext.R;
 import com.github.fobid.linkabletext.annotation.LinkType;
-import com.github.fobid.linkabletext.util.LinkableCallback;
-import com.github.fobid.linkabletext.util.LinkableMovementMethod;
-import com.github.fobid.linkabletext.util.OnLinkClickListener;
+import com.github.fobid.linkabletext.view.LinkableCallback;
+import com.github.fobid.linkabletext.text.method.LinkableMovementMethod;
+import com.github.fobid.linkabletext.view.OnLinkClickListener;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -119,7 +119,7 @@ public class LinkableTextView extends TextView {
         a.recycle();
     }
 
-    public void setMentionPattern(String mentionPattern) {
+    public void setMentionPattern(@Nullable String mentionPattern) {
         if (!TextUtils.isEmpty(mentionPattern)) {
             MENTION_PATTERN = Pattern.compile(mentionPattern);
         } else {
@@ -131,7 +131,11 @@ public class LinkableTextView extends TextView {
         return MENTION_PATTERN;
     }
 
-    public void setHashtagPattern(String hashTagPattern) {
+    public void setDefaultMentionPattern() {
+        setMentionPattern(null);
+    }
+
+    public void setHashtagPattern(@Nullable String hashTagPattern) {
         if (!TextUtils.isEmpty(hashTagPattern)) {
             HASHTAG_PATTERN = Pattern.compile(hashTagPattern);
         } else {
@@ -141,6 +145,10 @@ public class LinkableTextView extends TextView {
 
     public Pattern getHashtagPattern() {
         return HASHTAG_PATTERN;
+    }
+
+    public void setDefaultHashtagPattern() {
+        setHashtagPattern(null);
     }
 
     public boolean isEnabledLinks() {
@@ -254,7 +262,7 @@ public class LinkableTextView extends TextView {
         });
     }
 
-    public void setOnLinkClickListener(final LinkableCallback callback) {
+    public void setOnLinkClickListener(@Nullable final LinkableCallback callback) {
         Linkify.TransformFilter filter = new Linkify.TransformFilter() {
             public final String transformUrl(final Matcher match, String url) {
                 return match.group();
@@ -264,11 +272,11 @@ public class LinkableTextView extends TextView {
         if (enabledLinks) {
             if (enabledHashtag)
                 Linkify.addLinks(this, HASHTAG_PATTERN,
-                        LinkableMovementMethod.SOCIAL_UI_HASHTAG_SCHEME, null, filter);
+                        LinkableMovementMethod.LINKABLE_HASHTAG_SCHEME, null, filter);
 
             if (enabledMention)
                 Linkify.addLinks(this, MENTION_PATTERN,
-                        LinkableMovementMethod.SOCIAL_UI_MENTION_SCHEME, null, filter);
+                        LinkableMovementMethod.LINKABLE_MENTION_SCHEME, null, filter);
 
             if (enabledEmailAddress)
                 Linkify.addLinks(this, Patterns.EMAIL_ADDRESS, null, null, filter);
@@ -284,7 +292,7 @@ public class LinkableTextView extends TextView {
 
             if (enabledIpAddress)
                 Linkify.addLinks(this, IP_ADDRESS_PATTERN,
-                        LinkableMovementMethod.SOCIAL_UI_IP_ADDRESS_SCHEME, null, filter);
+                        LinkableMovementMethod.LINKABLE_IP_ADDRESS_SCHEME, null, filter);
         }
 
         MovementMethod movementMethod = null;
