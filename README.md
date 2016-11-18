@@ -1,6 +1,8 @@
 # Linkable Text Library
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-linkable--text-green.svg?style=flat)](http://android-arsenal.com/details/1/4674)
 
+[![Join the chat at https://gitter.im/fobid/linkable-text/Lobby](https://badges.gitter.im/fobid/linkable-text/Lobby.svg)](https://gitter.im/fobid/linkable-text?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Github Release][release-image]][release-url]
 
 You can download Linkable Text Sample application on Google Play.
