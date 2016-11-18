@@ -40,4 +40,4 @@ limitations under the License.
 ```
 
 [release-image]: https://img.shields.io/badge/release-v0.1.0-lightgrey.svg
-[release-url]: https://github.com/fobid/webviewer/releases/tag/0.1.
+[release-url]: https://github.com/fobid/linkable-text-android/releases/tag/v0.1.0
