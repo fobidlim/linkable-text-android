@@ -12,7 +12,7 @@ Download [the latest JAR](https://repo1.maven.org/maven2/com/github/fobid/linkab
 <dependency>
   <groupId>com.github.fobid</groupId>
   <artifactId>linkable-text</artifactId>
-  <version>0.0.1</version>
+  <version>0.1.0</version>
 </dependency>
 ```
 or Gradle:
@@ -39,5 +39,5 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-[release-image]: https://img.shields.io/badge/release-v0.0.1-lightgrey.svg
-[release-url]: https://github.com/fobid/webviewer/releases/tag/0.0.1
+[release-image]: https://img.shields.io/badge/release-v0.1.0-lightgrey.svg
+[release-url]: https://github.com/fobid/webviewer/releases/tag/0.1.
