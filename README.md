@@ -1,4 +1,5 @@
 # Linkable Text Library
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-linkable--text-green.svg?style=flat)](http://android-arsenal.com/details/1/4674)
 
 [![Github Release][release-image]][release-url]
 
