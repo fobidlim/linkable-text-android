@@ -4,7 +4,7 @@ package com.github.fobid.linkabletext.util;
  * Created by partner on 2016-11-17.
  */
 
-public interface OnLinkableClickListener {
+public interface OnLinkClickListener {
     void onHashtagClick(String hashtag);
 
     void onMentionClick(String mention);

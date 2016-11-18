@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.github.fobid.linkabletext.sample.R;
-import com.github.fobid.linkabletext.util.OnLinkableClickListener;
+import com.github.fobid.linkabletext.util.OnLinkClickListener;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
 
 import java.util.ArrayList;
@@ -85,7 +85,7 @@ public class ListViewActivity extends AppCompatActivity {
                 holder = (ViewHolder) convertView.getTag();
             }
             holder.textView.setText(getItem(position));
-            holder.textView.addLinks(new OnLinkableClickListener() {
+            holder.textView.setOnLinkClickListener(new OnLinkClickListener() {
                 @Override
                 public void onHashtagClick(String hashtag) {
                     Toast.makeText(ListViewActivity.this, "Clicked hashtag is " + hashtag, Toast.LENGTH_SHORT).show();

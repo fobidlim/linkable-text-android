@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.text.method.MovementMethod;
 import android.text.util.Linkify;
@@ -15,7 +16,7 @@ import com.github.fobid.linkabletext.R;
 import com.github.fobid.linkabletext.annotation.LinkType;
 import com.github.fobid.linkabletext.util.LinkableCallback;
 import com.github.fobid.linkabletext.util.LinkableMovementMethod;
-import com.github.fobid.linkabletext.util.OnLinkableClickListener;
+import com.github.fobid.linkabletext.util.OnLinkClickListener;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,6 +41,7 @@ public class LinkableTextView extends TextView {
     private static Pattern MENTION_PATTERN;
     private static Pattern HASHTAG_PATTERN;
 
+    private boolean enabledLinks = true;
     private boolean enabledHashtag = true;
     private boolean enabledMention = true;
     private boolean enabledEmailAddress = true;
@@ -86,6 +88,8 @@ public class LinkableTextView extends TextView {
                 mentionPattern = a.getString(attr);
             else if (attr == R.styleable.LinkableTextView_pattern_hashtag)
                 hashtagPattern = a.getString(attr);
+            else if (attr == R.styleable.LinkableTextView_enabledLinks)
+                enabledLinks = a.getBoolean(attr, true);
             else if (attr == R.styleable.LinkableTextView_enabledHashtag)
                 enabledHashtag = a.getBoolean(attr, true);
             else if (attr == R.styleable.LinkableTextView_enabledMention)
@@ -103,6 +107,7 @@ public class LinkableTextView extends TextView {
         }
         setMentionPattern(mentionPattern);
         setHashtagPattern(hashtagPattern);
+        setEnabledLinks(enabledLinks);
         setEnabledHashtag(enabledHashtag);
         setEnabledMention(enabledMention);
         setEnabledEmailAddress(enabledEmailAddress);
@@ -136,6 +141,14 @@ public class LinkableTextView extends TextView {
 
     public Pattern getHashtagPattern() {
         return HASHTAG_PATTERN;
+    }
+
+    public boolean isEnabledLinks() {
+        return enabledLinks;
+    }
+
+    public void setEnabledLinks(boolean enabledLinks) {
+        this.enabledLinks = enabledLinks;
     }
 
     public boolean isEnabledDomainName() {
@@ -194,78 +207,85 @@ public class LinkableTextView extends TextView {
         this.enabledWebUrl = enabledWebUrl;
     }
 
-    public void addLinks(final OnLinkableClickListener actionHandler) {
-        addLinks(new LinkableCallback() {
+    public void setOnLinkClickListener(@Nullable final OnLinkClickListener listener) {
+        setOnLinkClickListener(new LinkableCallback() {
             @Override
             public void onMatch(@LinkType int type, String value) {
+                if (listener == null || !enabledLinks)
+                    return;
+
                 switch (type) {
-                    case Link.HASH_TAG: {
+                    case Link.HASH_TAG:
                         if (enabledHashtag)
-                            actionHandler.onHashtagClick(value);
+                            listener.onHashtagClick(value);
                         break;
-                    }
-                    case Link.MENTION: {
+
+                    case Link.MENTION:
                         if (enabledMention)
-                            actionHandler.onMentionClick(value);
+                            listener.onMentionClick(value);
                         break;
-                    }
-                    case Link.EMAIL_ADDRESS: {
+
+                    case Link.EMAIL_ADDRESS:
                         if (enabledEmailAddress)
-                            actionHandler.onEmailAddressClick(value);
+                            listener.onEmailAddressClick(value);
                         break;
-                    }
-                    case Link.WEB_URL: {
+
+                    case Link.WEB_URL:
                         if (enabledWebUrl)
-                            actionHandler.onWebUrlClick(value);
+                            listener.onWebUrlClick(value);
                         break;
-                    }
-                    case Link.PHONE: {
+
+                    case Link.PHONE:
                         if (enabledPhone)
-                            actionHandler.onPhoneClick(value);
+                            listener.onPhoneClick(value);
                         break;
-                    }
-                    case Link.DOMAIN_NAME: {
+
+                    case Link.DOMAIN_NAME:
                         if (enabledDomainName)
-                            actionHandler.onDomainNameClick(value);
+                            listener.onDomainNameClick(value);
                         break;
-                    }
-                    case Link.IP_ADDRESS: {
+
+                    case Link.IP_ADDRESS:
                         if (enabledIpAddress)
-                            actionHandler.onIpAddressClick(value);
+                            listener.onIpAddressClick(value);
                         break;
-                    }
                 }
             }
         });
     }
 
-    public void addLinks(LinkableCallback callback) {
+    public void setOnLinkClickListener(final LinkableCallback callback) {
         Linkify.TransformFilter filter = new Linkify.TransformFilter() {
             public final String transformUrl(final Matcher match, String url) {
                 return match.group();
             }
         };
 
-        if (enabledHashtag)
-            Linkify.addLinks(this, HASHTAG_PATTERN, LinkableMovementMethod.SOCIAL_UI_HASHTAG_SCHEME, null, filter);
+        if (enabledLinks) {
+            if (enabledHashtag)
+                Linkify.addLinks(this, HASHTAG_PATTERN,
+                        LinkableMovementMethod.SOCIAL_UI_HASHTAG_SCHEME, null, filter);
 
-        if (enabledMention)
-            Linkify.addLinks(this, MENTION_PATTERN, LinkableMovementMethod.SOCIAL_UI_MENTION_SCHEME, null, filter);
+            if (enabledMention)
+                Linkify.addLinks(this, MENTION_PATTERN,
+                        LinkableMovementMethod.SOCIAL_UI_MENTION_SCHEME, null, filter);
 
-        if (enabledEmailAddress)
-            Linkify.addLinks(this, Patterns.EMAIL_ADDRESS, null, null, filter);
+            if (enabledEmailAddress)
+                Linkify.addLinks(this, Patterns.EMAIL_ADDRESS, null, null, filter);
 
-        if (enabledPhone)
-            Linkify.addLinks(this, Patterns.PHONE, null, null, filter);
+            if (enabledPhone)
+                Linkify.addLinks(this, Patterns.PHONE, null, null, filter);
 
-        if (enabledWebUrl)
-            Linkify.addLinks(this, Patterns.WEB_URL, null, null, filter);
+            if (enabledWebUrl)
+                Linkify.addLinks(this, Patterns.WEB_URL, null, null, filter);
 
-        if (enabledDomainName)
-            Linkify.addLinks(this, Patterns.DOMAIN_NAME, null, null, filter);
+            if (enabledDomainName)
+                Linkify.addLinks(this, Patterns.DOMAIN_NAME, null, null, filter);
 
-        if (enabledIpAddress)
-            Linkify.addLinks(this, IP_ADDRESS_PATTERN, LinkableMovementMethod.SOCIAL_UI_IP_ADDRESS_SCHEME, null, filter);
+            if (enabledIpAddress)
+                Linkify.addLinks(this, IP_ADDRESS_PATTERN,
+                        LinkableMovementMethod.SOCIAL_UI_IP_ADDRESS_SCHEME, null, filter);
+        }
 
         MovementMethod movementMethod = null;
         if (callback != null) {

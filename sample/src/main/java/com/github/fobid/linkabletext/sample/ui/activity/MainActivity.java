@@ -10,12 +10,12 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.fobid.linkabletext.sample.R;
-import com.github.fobid.linkabletext.util.OnLinkableClickListener;
+import com.github.fobid.linkabletext.util.OnLinkClickListener;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
 
 import io.fabric.sdk.android.Fabric;
 
-public class MainActivity extends AppCompatActivity implements OnLinkableClickListener {
+public class MainActivity extends AppCompatActivity implements OnLinkClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements OnLinkableClickLi
                 "And 010-0000-0000 is my phone number.\n" +
                 "Thank you.";
         textView.setText(text);
-        textView.addLinks(this);
+        textView.setOnLinkClickListener(this);
     }
 
     @Override

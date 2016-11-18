@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.github.fobid.linkabletext.sample.R;
-import com.github.fobid.linkabletext.util.OnLinkableClickListener;
+import com.github.fobid.linkabletext.util.OnLinkClickListener;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
 
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(RecyclerAdapter.ViewHolder holder, int position) {
             holder.textView.setText(mLinkList.get(position));
-            holder.textView.addLinks(new OnLinkableClickListener() {
+            holder.textView.setOnLinkClickListener(new OnLinkClickListener() {
                 @Override
                 public void onHashtagClick(String hashtag) {
                     Toast.makeText(RecyclerViewActivity.this, "Clicked hashtag is " + hashtag, Toast.LENGTH_SHORT).show();
