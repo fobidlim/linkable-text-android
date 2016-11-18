@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.github.fobid.linkabletext.R;
 import com.github.fobid.linkabletext.annotation.LinkType;
-import com.github.fobid.linkabletext.view.LinkableCallback;
 import com.github.fobid.linkabletext.text.method.LinkableMovementMethod;
+import com.github.fobid.linkabletext.view.LinkableCallback;
 import com.github.fobid.linkabletext.view.OnLinkClickListener;
 
 import java.util.regex.Matcher;
@@ -159,22 +159,6 @@ public class LinkableTextView extends TextView {
         this.enabledLinks = enabledLinks;
     }
 
-    public boolean isEnabledDomainName() {
-        return enabledDomainName;
-    }
-
-    public void setEnabledDomainName(boolean enabledDomainName) {
-        this.enabledDomainName = enabledDomainName;
-    }
-
-    public boolean isEnabledEmailAddress() {
-        return enabledEmailAddress;
-    }
-
-    public void setEnabledEmailAddress(boolean enabledEmailAddress) {
-        this.enabledEmailAddress = enabledEmailAddress;
-    }
-
     public boolean isEnabledHashtag() {
         return enabledHashtag;
     }
@@ -183,20 +167,20 @@ public class LinkableTextView extends TextView {
         this.enabledHashtag = enabledHashtag;
     }
 
-    public boolean isEnabledIpAddress() {
-        return enabledIpAddress;
-    }
-
-    public void setEnabledIpAddress(boolean enabledIpAddress) {
-        this.enabledIpAddress = enabledIpAddress;
-    }
-
     public boolean isEnabledMention() {
         return enabledMention;
     }
 
     public void setEnabledMention(boolean enabledMention) {
         this.enabledMention = enabledMention;
+    }
+
+    public boolean isEnabledEmailAddress() {
+        return enabledEmailAddress;
+    }
+
+    public void setEnabledEmailAddress(boolean enabledEmailAddress) {
+        this.enabledEmailAddress = enabledEmailAddress;
     }
 
     public boolean isEnabledPhone() {
@@ -214,6 +198,23 @@ public class LinkableTextView extends TextView {
     public void setEnabledWebUrl(boolean enabledWebUrl) {
         this.enabledWebUrl = enabledWebUrl;
     }
+
+    public boolean isEnabledDomainName() {
+        return enabledDomainName;
+    }
+
+    public void setEnabledDomainName(boolean enabledDomainName) {
+        this.enabledDomainName = enabledDomainName;
+    }
+
+    public boolean isEnabledIpAddress() {
+        return enabledIpAddress;
+    }
+
+    public void setEnabledIpAddress(boolean enabledIpAddress) {
+        this.enabledIpAddress = enabledIpAddress;
+    }
+
 
     public void setOnLinkClickListener(@Nullable final OnLinkClickListener listener) {
         setOnLinkClickListener(new LinkableCallback() {
