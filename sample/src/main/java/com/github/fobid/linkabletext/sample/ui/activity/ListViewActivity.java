@@ -36,12 +36,11 @@ public class ListViewActivity extends AppCompatActivity {
 
         mLinkList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            mLinkList.add("#" + (i + 1) + " http://blog.fobid.me is my #blog.");
-            mLinkList.add("fobid.me is the domain.");
-            mLinkList.add("You can also connect to my #blog on just blog.fobid.me");
-            mLinkList.add("You can contact me on #instagram @fobidlim.");
-            mLinkList.add("fobidbumz@gmail.com is my email and 010-0000-0000 is my phone number.");
-            mLinkList.add("Your IP address is 127.0.0.1");
+            mLinkList.add("#" + (i + 1) + " https://github.com/fobid/linkable-text-android is #github #repository of linkable-text.");
+            mLinkList.add("blog.fobid.me is my #blog.");
+            mLinkList.add("You can contact me via #instagram @fobidlim or email.");
+            mLinkList.add("Here is my email address. fobidbumz@gmail.com");
+            mLinkList.add("And 010-0000-0000 is my phone number.");
             mLinkList.add("Thank you.");
         }
 
@@ -89,37 +88,37 @@ public class ListViewActivity extends AppCompatActivity {
             holder.textView.addLinks(new OnLinkableClickListener() {
                 @Override
                 public void onHashtagClick(String hashtag) {
-                    Toast.makeText(ListViewActivity.this, "clicked hashtag is " + hashtag, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListViewActivity.this, "Clicked hashtag is " + hashtag, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onMentionClick(String mention) {
-                    Toast.makeText(ListViewActivity.this, "clicked mention is " + mention, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListViewActivity.this, "Clicked mention is " + mention, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onEmailAddressClick(String email) {
-                    Toast.makeText(ListViewActivity.this, "clicked email is " + email, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListViewActivity.this, "Clicked email is " + email, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onWebUrlClick(String url) {
-                    Toast.makeText(ListViewActivity.this, "clicked url is " + url, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListViewActivity.this, "Clicked url is " + url, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onPhoneClick(String phone) {
-                    Toast.makeText(ListViewActivity.this, "clicked phone is " + phone, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListViewActivity.this, "Clicked phone is " + phone, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onDomainNameClick(String domainName) {
-                    Toast.makeText(ListViewActivity.this, "clicked domain name is " + domainName, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListViewActivity.this, "Clicked domain name is " + domainName, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onIpAddressClick(String ipAddress) {
-                    Toast.makeText(ListViewActivity.this, "clicked ip address is " + ipAddress, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListViewActivity.this, "Clicked ip address is " + ipAddress, Toast.LENGTH_SHORT).show();
                 }
             });
             return convertView;
