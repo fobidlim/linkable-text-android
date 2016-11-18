@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LinkableTextView">
+        <attr name="pattern_hashtag" format="string" />
+        <attr name="pattern_mention" format="string" />
+        <attr name="enabledLinks" format="boolean" />
+        <attr name="enabledMention" format="boolean" />
+        <attr name="enabledHashtag" format="boolean" />
+        <attr name="enabledEmail_address" format="boolean" />
+        <attr name="enabledPhone" format="boolean" />
+        <attr name="enabledWeb_url" format="boolean" />
+        <attr name="enabledDomain_name" format="boolean" />
+        <attr name="enabledIp_address" format="boolean" />
+    </declare-styleable>
+</resources>

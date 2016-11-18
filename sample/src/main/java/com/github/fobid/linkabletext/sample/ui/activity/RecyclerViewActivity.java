@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.github.fobid.linkabletext.sample.R;
-import com.github.fobid.linkabletext.util.OnLinkableClickListener;
+import com.github.fobid.linkabletext.view.OnLinkClickListener;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
 
 import java.util.ArrayList;
@@ -35,12 +35,11 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
         mLinkList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            mLinkList.add("#" + (i + 1) + " http://blog.fobid.me is my #blog.");
-            mLinkList.add("fobid.me is the domain.");
-            mLinkList.add("You can also connect to my #blog on just blog.fobid.me");
-            mLinkList.add("You can contact me on #instagram @fobidlim.");
-            mLinkList.add("fobidbumz@gmail.com is my email and 010-0000-0000 is my phone number.");
-            mLinkList.add("Your IP address is 127.0.0.1");
+            mLinkList.add("#" + (i + 1) + " https://github.com/fobid/linkable-text-android is #github #repository of linkable-text.");
+            mLinkList.add("blog.fobid.me is my #blog.");
+            mLinkList.add("You can contact me via #instagram @fobidlim or email.");
+            mLinkList.add("Here is my email address. fobidbumz@gmail.com");
+            mLinkList.add("And 010-0000-0000 is my phone number.");
             mLinkList.add("Thank you.");
         }
 
@@ -66,40 +65,40 @@ public class RecyclerViewActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(RecyclerAdapter.ViewHolder holder, int position) {
             holder.textView.setText(mLinkList.get(position));
-            holder.textView.addLinks(new OnLinkableClickListener() {
+            holder.textView.setOnLinkClickListener(new OnLinkClickListener() {
                 @Override
                 public void onHashtagClick(String hashtag) {
-                    Toast.makeText(RecyclerViewActivity.this, "clicked hashtag is " + hashtag, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RecyclerViewActivity.this, "Clicked hashtag is " + hashtag, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onMentionClick(String mention) {
-                    Toast.makeText(RecyclerViewActivity.this, "clicked mention is " + mention, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RecyclerViewActivity.this, "Clicked mention is " + mention, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onEmailClick(String email) {
-                    Toast.makeText(RecyclerViewActivity.this, "clicked email is " + email, Toast.LENGTH_SHORT).show();
+                public void onEmailAddressClick(String email) {
+                    Toast.makeText(RecyclerViewActivity.this, "Clicked email is " + email, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onUrlClick(String url) {
-                    Toast.makeText(RecyclerViewActivity.this, "clicked url is " + url, Toast.LENGTH_SHORT).show();
+                public void onWebUrlClick(String url) {
+                    Toast.makeText(RecyclerViewActivity.this, "Clicked url is " + url, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onPhoneClick(String phone) {
-                    Toast.makeText(RecyclerViewActivity.this, "clicked phone is " + phone, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RecyclerViewActivity.this, "Clicked phone is " + phone, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onDomainNameClick(String domainName) {
-                    Toast.makeText(RecyclerViewActivity.this, "clicked domain name is " + domainName, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RecyclerViewActivity.this, "Clicked domain name is " + domainName, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onIpAddressClick(String ipAddress) {
-                    Toast.makeText(RecyclerViewActivity.this, "clicked ip address is " + ipAddress, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RecyclerViewActivity.this, "Clicked ip address is " + ipAddress, Toast.LENGTH_SHORT).show();
                 }
             });
         }

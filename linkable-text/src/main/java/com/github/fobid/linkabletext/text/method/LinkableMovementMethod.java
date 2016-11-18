@@ -1,4 +1,4 @@
-package com.github.fobid.linkabletext.util;
+package com.github.fobid.linkabletext.text.method;
 
 import android.text.Layout;
 import android.text.Selection;
@@ -7,7 +7,8 @@ import android.text.style.URLSpan;
 import android.util.Patterns;
 import android.view.MotionEvent;
 
-import com.github.fobid.linkabletext.annotation.Link;
+import com.github.fobid.linkabletext.annotation.LinkType;
+import com.github.fobid.linkabletext.view.LinkableCallback;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
 
 /**
@@ -16,10 +17,10 @@ import com.github.fobid.linkabletext.widget.LinkableTextView;
 
 public class LinkableMovementMethod extends LinkMovementMethod {
 
-    private static final String SOCIAL_UI_BASE_SCHEME = "http://blog.fobid.me";
-    public static final String SOCIAL_UI_HASHTAG_SCHEME = SOCIAL_UI_BASE_SCHEME + "/hashtag";
-    public static final String SOCIAL_UI_MENTION_SCHEME = SOCIAL_UI_BASE_SCHEME + "/mention";
-    public static final String SOCIAL_UI_IP_ADDRESS_SCHEME = SOCIAL_UI_BASE_SCHEME + "/ip";
+    private static final String LINKABLE_BASE_SCHEME = "https://github.com/fobid/linkable-text-android";
+    public static final String LINKABLE_HASHTAG_SCHEME = LINKABLE_BASE_SCHEME + "/hashtag";
+    public static final String LINKABLE_MENTION_SCHEME = LINKABLE_BASE_SCHEME + "/mention";
+    public static final String LINKABLE_IP_ADDRESS_SCHEME = LINKABLE_BASE_SCHEME + "/ip";
 
     private final LinkableCallback mLinkableCallback;
 
@@ -28,7 +29,7 @@ public class LinkableMovementMethod extends LinkMovementMethod {
         if (linkableCallback == null) {
             mLinkableCallback = new LinkableCallback() {
                 @Override
-                public void onMatch(@Link int type, String value) {
+                public void onMatch(@LinkType int type, String value) {
                 }
             };
         } else {
@@ -67,20 +68,20 @@ public class LinkableMovementMethod extends LinkMovementMethod {
     }
 
     private void handleLink(String link) {
-        if (link.startsWith(SOCIAL_UI_HASHTAG_SCHEME)) {
-            String hashtag = link.replaceFirst(SOCIAL_UI_HASHTAG_SCHEME, "");
+        if (link.startsWith(LINKABLE_HASHTAG_SCHEME)) {
+            String hashtag = link.replaceFirst(LINKABLE_HASHTAG_SCHEME, "");
             hashtag = hashtag.replaceFirst(".*#", "");
             mLinkableCallback.onMatch(LinkableTextView.Link.HASH_TAG, hashtag);
-        } else if (link.startsWith(SOCIAL_UI_MENTION_SCHEME)) {
-            String mention = link.replaceFirst(SOCIAL_UI_MENTION_SCHEME, "");
+        } else if (link.startsWith(LINKABLE_MENTION_SCHEME)) {
+            String mention = link.replaceFirst(LINKABLE_MENTION_SCHEME, "");
             mention = mention.replaceFirst(".*@", "");
             mLinkableCallback.onMatch(LinkableTextView.Link.MENTION, mention);
-        } else if (link.startsWith(SOCIAL_UI_IP_ADDRESS_SCHEME)) {
-            String ip = link.replaceFirst(SOCIAL_UI_IP_ADDRESS_SCHEME, "");
+        } else if (link.startsWith(LINKABLE_IP_ADDRESS_SCHEME)) {
+            String ip = link.replaceFirst(LINKABLE_IP_ADDRESS_SCHEME, "");
             ip = ip.replaceFirst(".", "");
             mLinkableCallback.onMatch(LinkableTextView.Link.IP_ADDRESS, ip);
         } else if (Patterns.EMAIL_ADDRESS.matcher(link).matches()) {
-            mLinkableCallback.onMatch(LinkableTextView.Link.EMAIL, link);
+            mLinkableCallback.onMatch(LinkableTextView.Link.EMAIL_ADDRESS, link);
         } else if (Patterns.IP_ADDRESS.matcher(link).matches()) {
             mLinkableCallback.onMatch(LinkableTextView.Link.IP_ADDRESS, link);
         } else if (Patterns.PHONE.matcher(link).matches()) {
@@ -88,7 +89,7 @@ public class LinkableMovementMethod extends LinkMovementMethod {
         } else if (Patterns.DOMAIN_NAME.matcher(link).matches()) {
             mLinkableCallback.onMatch(LinkableTextView.Link.DOMAIN_NAME, link);
         } else {
-            mLinkableCallback.onMatch(LinkableTextView.Link.URL, link);
+            mLinkableCallback.onMatch(LinkableTextView.Link.WEB_URL, link);
         }
     }
 }
