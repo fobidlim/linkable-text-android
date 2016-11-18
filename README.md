@@ -21,6 +21,15 @@ compile 'com.github.fobid:linkable-text:0.1.1'
 ```
 
 # Usage
+```
+ <com.github.fobid.linkabletext.widget.LinkableTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+```
+If you don't want to set link, then add `app:enabledLinks="false"` in your xml.
+Or, `LinkableTextView.setEnabledLinks(false)` in your code.
+
+You must call `LinkableTextView.setOnLinkClickListener()` after `setText()` to set links  clickable.
 
 # License
 ```
