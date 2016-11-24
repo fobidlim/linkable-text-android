@@ -1,3 +1,6 @@
+## 0.1.2
+- Fixed ANR occurring on API 16~18(Jelly Bean), Api 19(Kitkat).
+
 ## 0.1.1
 - Added `setEnabledLinks()`, `setEnabledHashtag`, `setEnabledMention`, `setEnabledEmailAddress`, `setEnabledPhone`, `setEnabledWebUrl`, `setEnabledDomainName`, `setEnabledIpAddress` to `LinkableTextView`.
 
