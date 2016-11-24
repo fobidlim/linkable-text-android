@@ -19,29 +19,29 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
-//    signingConfigs {
-//        release {
-//            keyAlias properties.getProperty("KEY_ALIAS")
-//            keyPassword properties.getProperty("KEY_PASSWORD")
-//            storeFile file(properties.getProperty("KEYSTORE_PATH"))
-//            storePassword properties.getProperty("KEYSTORE_PASSWORD")
-//        }
-//    }
+    signingConfigs {
+        release {
+            keyAlias properties.getProperty("KEY_ALIAS")
+            keyPassword properties.getProperty("KEY_PASSWORD")
+            storeFile file(properties.getProperty("KEYSTORE_PATH"))
+            storePassword properties.getProperty("KEYSTORE_PASSWORD")
+        }
+    }
     compileSdkVersion 24
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.github.fobid.linkabletext.sample"
         minSdkVersion 9
         targetSdkVersion 24
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
         }
     }
 }
