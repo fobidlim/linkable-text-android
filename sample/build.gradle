@@ -19,14 +19,14 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
-    signingConfigs {
-        release {
-            keyAlias properties.getProperty("KEY_ALIAS")
-            keyPassword properties.getProperty("KEY_PASSWORD")
-            storeFile file(properties.getProperty("KEYSTORE_PATH"))
-            storePassword properties.getProperty("KEYSTORE_PASSWORD")
-        }
-    }
+//    signingConfigs {
+//        release {
+//            keyAlias properties.getProperty("KEY_ALIAS")
+//            keyPassword properties.getProperty("KEY_PASSWORD")
+//            storeFile file(properties.getProperty("KEYSTORE_PATH"))
+//            storePassword properties.getProperty("KEYSTORE_PASSWORD")
+//        }
+//    }
     compileSdkVersion 24
     buildToolsVersion "25.0.0"
     defaultConfig {
@@ -41,7 +41,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
     }
 }

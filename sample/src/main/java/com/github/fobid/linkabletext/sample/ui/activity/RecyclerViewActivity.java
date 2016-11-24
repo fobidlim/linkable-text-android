@@ -91,16 +91,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 public void onPhoneClick(String phone) {
                     Toast.makeText(RecyclerViewActivity.this, "clicked phone is " + phone, Toast.LENGTH_SHORT).show();
                 }
-
-                @Override
-                public void onDomainNameClick(String domainName) {
-                    Toast.makeText(RecyclerViewActivity.this, "clicked domain name is " + domainName, Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onIpAddressClick(String ipAddress) {
-                    Toast.makeText(RecyclerViewActivity.this, "clicked ip address is " + ipAddress, Toast.LENGTH_SHORT).show();
-                }
             });
         }
 

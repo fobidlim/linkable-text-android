@@ -12,6 +12,7 @@ import com.crashlytics.android.Crashlytics;
 import com.github.fobid.linkabletext.sample.R;
 import com.github.fobid.linkabletext.util.OnLinkableClickListener;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
+
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements OnLinkableClickListener {
@@ -79,15 +80,5 @@ public class MainActivity extends AppCompatActivity implements OnLinkableClickLi
     @Override
     public void onPhoneClick(String phone) {
         Toast.makeText(this, "clicked phone is " + phone, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onDomainNameClick(String domainName) {
-        Toast.makeText(this, "clicked domain name is " + domainName, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onIpAddressClick(String ipAddress) {
-        Toast.makeText(this, "clicked ip address is " + ipAddress, Toast.LENGTH_SHORT).show();
     }
 }

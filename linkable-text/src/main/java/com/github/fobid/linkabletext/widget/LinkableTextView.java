@@ -32,8 +32,7 @@ public class LinkableTextView extends TextView {
         int EMAIL_ADDRESS = 0x3;
         int PHONE = 0x4;
         int WEB_URL = 0x5;
-        int DOMAIN_NAME = 0x6;
-        int IP_ADDRESS = 0x7;
+        int IP_ADDRESS = 0x6;
     }
 
     private static final Pattern IP_ADDRESS_PATTERN = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
@@ -45,7 +44,6 @@ public class LinkableTextView extends TextView {
     private boolean enabledEmailAddress = true;
     private boolean enabledPhone = true;
     private boolean enabledWebUrl = true;
-    private boolean enabledDomainName = true;
     private boolean enabledIpAddress = true;
 
     public LinkableTextView(Context context) {
@@ -96,8 +94,6 @@ public class LinkableTextView extends TextView {
                 enabledPhone = a.getBoolean(attr, true);
             else if (attr == R.styleable.LinkableTextView_enabledWeb_url)
                 enabledWebUrl = a.getBoolean(attr, true);
-            else if (attr == R.styleable.LinkableTextView_enabledDomain_name)
-                enabledDomainName = a.getBoolean(attr, true);
             else if (attr == R.styleable.LinkableTextView_enabledIp_address)
                 enabledIpAddress = a.getBoolean(attr, true);
         }
@@ -108,7 +104,6 @@ public class LinkableTextView extends TextView {
         setEnabledEmailAddress(enabledEmailAddress);
         setEnabledPhone(enabledPhone);
         setEnabledWebUrl(enabledWebUrl);
-        setEnabledDomainName(enabledDomainName);
         setEnabledIpAddress(enabledIpAddress);
 
         a.recycle();
@@ -136,14 +131,6 @@ public class LinkableTextView extends TextView {
 
     public Pattern getHashtagPattern() {
         return HASHTAG_PATTERN;
-    }
-
-    public boolean isEnabledDomainName() {
-        return enabledDomainName;
-    }
-
-    public void setEnabledDomainName(boolean enabledDomainName) {
-        this.enabledDomainName = enabledDomainName;
     }
 
     public boolean isEnabledEmailAddress() {
@@ -214,6 +201,9 @@ public class LinkableTextView extends TextView {
                             actionHandler.onEmailAddressClick(value);
                         break;
                     }
+                    case Link.IP_ADDRESS:
+                        if (!enabledIpAddress)
+                            break;
                     case Link.WEB_URL: {
                         if (enabledWebUrl)
                             actionHandler.onWebUrlClick(value);
@@ -222,16 +212,6 @@ public class LinkableTextView extends TextView {
                     case Link.PHONE: {
                         if (enabledPhone)
                             actionHandler.onPhoneClick(value);
-                        break;
-                    }
-                    case Link.DOMAIN_NAME: {
-                        if (enabledDomainName)
-                            actionHandler.onDomainNameClick(value);
-                        break;
-                    }
-                    case Link.IP_ADDRESS: {
-                        if (enabledIpAddress)
-                            actionHandler.onIpAddressClick(value);
                         break;
                     }
                 }
@@ -260,9 +240,6 @@ public class LinkableTextView extends TextView {
 
         if (enabledWebUrl)
             Linkify.addLinks(this, Patterns.WEB_URL, null, null, filter);
-
-        if (enabledDomainName)
-            Linkify.addLinks(this, Patterns.DOMAIN_NAME, null, null, filter);
 
         if (enabledIpAddress)
             Linkify.addLinks(this, IP_ADDRESS_PATTERN, LinkableMovementMethod.SOCIAL_UI_IP_ADDRESS_SCHEME, null, filter);

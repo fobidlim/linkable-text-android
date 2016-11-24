@@ -8,7 +8,6 @@
         <attr name="enabledEmail_address" format="boolean" />
         <attr name="enabledPhone" format="boolean" />
         <attr name="enabledWeb_url" format="boolean" />
-        <attr name="enabledDomain_name" format="boolean" />
         <attr name="enabledIp_address" format="boolean" />
     </declare-styleable>
 </resources>
