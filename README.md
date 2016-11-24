@@ -1,4 +1,7 @@
 # Linkable Text Library
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-linkable--text-green.svg?style=flat)](http://android-arsenal.com/details/1/4674)
+
+[![Join the chat at https://gitter.im/fobid/linkable-text/Lobby](https://badges.gitter.im/fobid/linkable-text/Lobby.svg)](https://gitter.im/fobid/linkable-text?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![Github Release][release-image]][release-url]
 
@@ -7,20 +10,29 @@ You can download Linkable Text Sample application on Google Play.
 [![Get it on Google Play](http://www.android.com/images/brand/get_it_on_play_logo_small.png)](https://play.google.com/store/apps/details?id=com.github.fobid.linkabletext.sample)
 
 # Download
-Download [the latest JAR](https://repo1.maven.org/maven2/com/github/fobid/linkabletext/0.1.0/linkabletext-0.1.0.aar) or grab via Maven:
+Download [the latest JAR](https://repo1.maven.org/maven2/com/github/fobid/linkabletext/0.1.1/linkabletext-0.1.1.aar) or grab via Maven:
 ```
 <dependency>
   <groupId>com.github.fobid</groupId>
   <artifactId>linkable-text</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
 </dependency>
 ```
 or Gradle:
 ```
-compile 'com.github.fobid:linkable-text:0.1.0'
+compile 'com.github.fobid:linkable-text:0.1.1'
 ```
 
 # Usage
+```
+ <com.github.fobid.linkabletext.widget.LinkableTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+```
+If you don't want to set link, then add `app:enabledLinks="false"` in your xml.
+Or, `LinkableTextView.setEnabledLinks(false)` in your code.
+
+You must call `LinkableTextView.setOnLinkClickListener()` after `setText()` to set links  clickable.
 
 # License
 ```
@@ -39,5 +51,5 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-[release-image]: https://img.shields.io/badge/release-v0.1.0-lightgrey.svg
-[release-url]: https://github.com/fobid/linkable-text-android/releases/tag/v0.1.0
+[release-image]: https://img.shields.io/badge/release-v0.1.1-lightgrey.svg
+[release-url]: https://github.com/fobid/linkable-text-android/releases/tag/v0.1.1

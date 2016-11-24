@@ -1,4 +1,4 @@
-package com.github.fobid.linkabletext.util;
+package com.github.fobid.linkabletext.view;
 
 import com.github.fobid.linkabletext.annotation.LinkType;
 
