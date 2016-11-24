@@ -82,14 +82,12 @@ public class LinkableMovementMethod extends LinkMovementMethod {
             mLinkableCallback.onMatch(LinkableTextView.Link.IP_ADDRESS, ip);
         } else if (Patterns.EMAIL_ADDRESS.matcher(link).matches()) {
             mLinkableCallback.onMatch(LinkableTextView.Link.EMAIL_ADDRESS, link);
-        } else if (Patterns.IP_ADDRESS.matcher(link).matches()) {
-            mLinkableCallback.onMatch(LinkableTextView.Link.IP_ADDRESS, link);
+        } else if (Patterns.IP_ADDRESS.matcher(link).matches()
+                || Patterns.DOMAIN_NAME.matcher(link).matches()
+                || Patterns.WEB_URL.matcher(link).matches()) {
+            mLinkableCallback.onMatch(LinkableTextView.Link.WEB_URL, link);
         } else if (Patterns.PHONE.matcher(link).matches()) {
             mLinkableCallback.onMatch(LinkableTextView.Link.PHONE, link);
-        } else if (Patterns.DOMAIN_NAME.matcher(link).matches()) {
-            mLinkableCallback.onMatch(LinkableTextView.Link.DOMAIN_NAME, link);
-        } else {
-            mLinkableCallback.onMatch(LinkableTextView.Link.WEB_URL, link);
         }
     }
 }

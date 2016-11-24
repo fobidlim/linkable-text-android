@@ -14,8 +14,4 @@ public interface OnLinkClickListener {
     void onWebUrlClick(String url);
 
     void onPhoneClick(String phone);
-
-    void onDomainNameClick(String domainName);
-
-    void onIpAddressClick(String ipAddress);
 }

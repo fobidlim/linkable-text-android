@@ -15,7 +15,6 @@ import java.lang.annotation.RetentionPolicy;
         LinkableTextView.Link.EMAIL_ADDRESS,
         LinkableTextView.Link.PHONE,
         LinkableTextView.Link.WEB_URL,
-        LinkableTextView.Link.DOMAIN_NAME,
         LinkableTextView.Link.IP_ADDRESS
 })
 @Retention(RetentionPolicy.SOURCE)

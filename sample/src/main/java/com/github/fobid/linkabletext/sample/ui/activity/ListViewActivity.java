@@ -110,16 +110,6 @@ public class ListViewActivity extends AppCompatActivity {
                 public void onPhoneClick(String phone) {
                     Toast.makeText(ListViewActivity.this, "Clicked phone is " + phone, Toast.LENGTH_SHORT).show();
                 }
-
-                @Override
-                public void onDomainNameClick(String domainName) {
-                    Toast.makeText(ListViewActivity.this, "Clicked domain name is " + domainName, Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onIpAddressClick(String ipAddress) {
-                    Toast.makeText(ListViewActivity.this, "Clicked ip address is " + ipAddress, Toast.LENGTH_SHORT).show();
-                }
             });
             return convertView;
         }
