@@ -10,7 +10,7 @@ You can download Linkable Text Sample application on Google Play.
 [![Get it on Google Play](http://www.android.com/images/brand/get_it_on_play_logo_small.png)](https://play.google.com/store/apps/details?id=com.github.fobid.linkabletext.sample)
 
 # Download
-Download [the latest JAR](https://repo1.maven.org/maven2/com/github/fobid/linkabletext/0.1.2/linkabletext-0.1.2.aar) or grab via Maven:
+Download [the latest JAR](https://repo1.maven.org/maven2/com/github/fobid/linkable-text/0.1.2/linkable-text-0.1.2.aar) or grab via Maven:
 ```
 <dependency>
   <groupId>com.github.fobid</groupId>
