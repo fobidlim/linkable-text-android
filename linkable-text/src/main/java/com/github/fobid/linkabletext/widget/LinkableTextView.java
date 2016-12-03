@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.annotation.Nullable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.method.MovementMethod;
+import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.util.AttributeSet;
 import android.util.Patterns;
@@ -48,6 +51,14 @@ public class LinkableTextView extends TextView {
     private boolean enabledWebUrl = true;
     private boolean enabledIpAddress = true;
 
+    private boolean enabledUnderlines = true;
+    private boolean enabledHashtagUnderline = true;
+    private boolean enabledMentionUnderline = true;
+    private boolean enabledEmailAddressUnderline = true;
+    private boolean enabledPhoneUnderline = true;
+    private boolean enabledWebUrlUnderline = true;
+    private boolean enabledIpAddressUnderline = true;
+
     public LinkableTextView(Context context) {
         super(context);
     }
@@ -84,25 +95,55 @@ public class LinkableTextView extends TextView {
 
             if (attr == R.styleable.LinkableTextView_pattern_mention)
                 mentionPattern = a.getString(attr);
+
             else if (attr == R.styleable.LinkableTextView_pattern_hashtag)
                 hashtagPattern = a.getString(attr);
+
             else if (attr == R.styleable.LinkableTextView_enabledLinks)
                 enabledLinks = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledHashtag)
                 enabledHashtag = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledMention)
                 enabledMention = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledEmail_address)
                 enabledEmailAddress = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledPhone)
                 enabledPhone = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledWeb_url)
                 enabledWebUrl = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledIp_address)
                 enabledIpAddress = a.getBoolean(attr, true);
+
+            else if (attr == R.styleable.LinkableTextView_enabledUnderlines)
+                enabledUnderlines = a.getBoolean(attr, true);
+
+            else if (attr == R.styleable.LinkableTextView_enabledHashtagUnderline)
+                enabledHashtagUnderline = a.getBoolean(attr, true);
+
+            else if (attr == R.styleable.LinkableTextView_enabledMentionUnderline)
+                enabledMentionUnderline = a.getBoolean(attr, true);
+
+            else if (attr == R.styleable.LinkableTextView_enabledEmail_addressUnderline)
+                enabledEmailAddressUnderline = a.getBoolean(attr, true);
+
+            else if (attr == R.styleable.LinkableTextView_enabledPhoneUnderline)
+                enabledPhoneUnderline = a.getBoolean(attr, true);
+
+            else if (attr == R.styleable.LinkableTextView_enabledWeb_urlUnderline)
+                enabledWebUrlUnderline = a.getBoolean(attr, true);
+
+            else if (attr == R.styleable.LinkableTextView_enabledIp_addressUnderline)
+                enabledIpAddressUnderline = a.getBoolean(attr, true);
         }
         setMentionPattern(mentionPattern);
         setHashtagPattern(hashtagPattern);
+
         setEnabledLinks(enabledLinks);
         setEnabledHashtag(enabledHashtag);
         setEnabledMention(enabledMention);
@@ -110,6 +151,14 @@ public class LinkableTextView extends TextView {
         setEnabledPhone(enabledPhone);
         setEnabledWebUrl(enabledWebUrl);
         setEnabledIpAddress(enabledIpAddress);
+
+        setEnabledUnderlines(enabledUnderlines);
+        setEnabledHashtagUnderline(enabledHashtagUnderline);
+        setEnabledMentionUnderline(enabledMentionUnderline);
+        setEnabledEmailAddressUnderline(enabledEmailAddressUnderline);
+        setEnabledPhoneUnderline(enabledPhoneUnderline);
+        setEnabledWebUrlUnderline(enabledWebUrlUnderline);
+        setEnabledIpAddressUnderline(enabledIpAddressUnderline);
 
         a.recycle();
     }
@@ -202,6 +251,61 @@ public class LinkableTextView extends TextView {
         this.enabledIpAddress = enabledIpAddress;
     }
 
+    public boolean isEnabledUnderlines() {
+        return enabledUnderlines;
+    }
+
+    public void setEnabledUnderlines(boolean enabledUnderlines) {
+        this.enabledUnderlines = enabledUnderlines;
+    }
+
+    public boolean isEnabledHashtagUnderline() {
+        return enabledHashtagUnderline;
+    }
+
+    public void setEnabledHashtagUnderline(boolean enabledHashtagUnderline) {
+        this.enabledHashtagUnderline = enabledHashtagUnderline;
+    }
+
+    public boolean isEnabledMentionUnderline() {
+        return enabledMentionUnderline;
+    }
+
+    public void setEnabledMentionUnderline(boolean enabledMentionUnderline) {
+        this.enabledMentionUnderline = enabledMentionUnderline;
+    }
+
+    public boolean isEnabledEmailAddressUnderline() {
+        return enabledEmailAddressUnderline;
+    }
+
+    public void setEnabledEmailAddressUnderline(boolean enabledEmailAddressUnderline) {
+        this.enabledEmailAddressUnderline = enabledEmailAddressUnderline;
+    }
+
+    public boolean isEnabledPhoneUnderline() {
+        return enabledPhoneUnderline;
+    }
+
+    public void setEnabledPhoneUnderline(boolean enabledPhoneUnderline) {
+        this.enabledPhoneUnderline = enabledPhoneUnderline;
+    }
+
+    public boolean isEnabledWebUrlUnderline() {
+        return enabledWebUrlUnderline;
+    }
+
+    public void setEnabledWebUrlUnderline(boolean enabledWebUrlUnderline) {
+        this.enabledWebUrlUnderline = enabledWebUrlUnderline;
+    }
+
+    public boolean isEnabledIpAddressUnderline() {
+        return enabledIpAddressUnderline;
+    }
+
+    public void setEnabledIpAddressUnderline(boolean enabledIpAddressUnderline) {
+        this.enabledIpAddressUnderline = enabledIpAddressUnderline;
+    }
 
     public void setOnLinkClickListener(@Nullable final OnLinkClickListener listener) {
         setOnLinkClickListener(new LinkableCallback() {
@@ -250,26 +354,75 @@ public class LinkableTextView extends TextView {
         };
 
         if (enabledLinks) {
-            if (enabledHashtag)
-                Linkify.addLinks(this, HASHTAG_PATTERN,
-                        LinkableMovementMethod.LINKABLE_HASHTAG_SCHEME, null, filter);
+            if (enabledUnderlines) {
+                if (enabledHashtag) {
+                    Linkify.addLinks(this, HASHTAG_PATTERN,
+                            LinkableMovementMethod.LINKABLE_HASHTAG_SCHEME, null, filter);
 
-            if (enabledMention)
-                Linkify.addLinks(this, MENTION_PATTERN,
-                        LinkableMovementMethod.LINKABLE_MENTION_SCHEME, null, filter);
+                    if (!enabledHashtagUnderline)
+                        stripUnderlines();
+                }
 
-            if (enabledEmailAddress)
-                Linkify.addLinks(this, Patterns.EMAIL_ADDRESS, null, null, filter);
+                if (enabledMention) {
+                    Linkify.addLinks(this, MENTION_PATTERN,
+                            LinkableMovementMethod.LINKABLE_MENTION_SCHEME, null, filter);
 
-            if (enabledPhone)
-                Linkify.addLinks(this, Patterns.PHONE, null, null, filter);
+                    if (!enabledMentionUnderline)
+                        stripUnderlines();
+                }
 
-            if (enabledWebUrl)
-                Linkify.addLinks(this, Patterns.WEB_URL, null, null, filter);
+                if (enabledEmailAddress) {
+                    Linkify.addLinks(this, Patterns.EMAIL_ADDRESS, null, null, filter);
 
-            if (enabledIpAddress)
-                Linkify.addLinks(this, IP_ADDRESS_PATTERN,
-                        LinkableMovementMethod.LINKABLE_IP_ADDRESS_SCHEME, null, filter);
+                    if (!enabledEmailAddressUnderline)
+                        stripUnderlines();
+                }
+
+                if (enabledPhone) {
+                    Linkify.addLinks(this, Patterns.PHONE, null, null, filter);
+
+                    if (!enabledPhoneUnderline)
+                        stripUnderlines();
+                }
+
+                if (enabledWebUrl) {
+                    Linkify.addLinks(this, Patterns.WEB_URL, null, null, filter);
+
+                    if (!enabledWebUrlUnderline)
+                        stripUnderlines();
+                }
+
+                if (enabledIpAddress) {
+                    Linkify.addLinks(this, IP_ADDRESS_PATTERN,
+                            LinkableMovementMethod.LINKABLE_IP_ADDRESS_SCHEME, null, filter);
+
+                    if (!enabledIpAddressUnderline)
+                        stripUnderlines();
+                }
+            } else {
+                if (enabledHashtag)
+                    Linkify.addLinks(this, HASHTAG_PATTERN,
+                            LinkableMovementMethod.LINKABLE_HASHTAG_SCHEME, null, filter);
+
+                if (enabledMention)
+                    Linkify.addLinks(this, MENTION_PATTERN,
+                            LinkableMovementMethod.LINKABLE_MENTION_SCHEME, null, filter);
+
+                if (enabledEmailAddress)
+                    Linkify.addLinks(this, Patterns.EMAIL_ADDRESS, null, null, filter);
+
+                if (enabledPhone)
+                    Linkify.addLinks(this, Patterns.PHONE, null, null, filter);
+
+                if (enabledWebUrl)
+                    Linkify.addLinks(this, Patterns.WEB_URL, null, null, filter);
+
+                if (enabledIpAddress)
+                    Linkify.addLinks(this, IP_ADDRESS_PATTERN,
+                            LinkableMovementMethod.LINKABLE_IP_ADDRESS_SCHEME, null, filter);
+
+                stripUnderlines();
+            }
         }
 
         MovementMethod movementMethod = null;
@@ -278,4 +431,18 @@ public class LinkableTextView extends TextView {
         }
         setMovementMethod(movementMethod);
     }
+
+    private void stripUnderlines() {
+        Spannable s = new SpannableString(getText());
+        URLSpan[] spans = s.getSpans(0, s.length(), URLSpan.class);
+        for (URLSpan span : spans) {
+            int start = s.getSpanStart(span);
+            int end = s.getSpanEnd(span);
+            s.removeSpan(span);
+            span = new URLSpanNoUnderline(span.getURL());
+            s.setSpan(span, start, end, 0);
+        }
+        setText(s);
+    }
+
 }
