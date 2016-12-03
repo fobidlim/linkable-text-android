@@ -10,5 +10,12 @@
         <attr name="enabledPhone" format="boolean" />
         <attr name="enabledWeb_url" format="boolean" />
         <attr name="enabledIp_address" format="boolean" />
+        <attr name="enabledUnderlines" format="boolean" />
+        <attr name="enabledMentionUnderline" format="boolean" />
+        <attr name="enabledHashtagUnderline" format="boolean" />
+        <attr name="enabledEmail_addressUnderline" format="boolean" />
+        <attr name="enabledPhoneUnderline" format="boolean" />
+        <attr name="enabledWeb_urlUnderline" format="boolean" />
+        <attr name="enabledIp_addressUnderline" format="boolean" />
     </declare-styleable>
 </resources>
