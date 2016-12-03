@@ -1,8 +1,13 @@
+## 0.1.3
+- Added `setEnabledUnderlines()`, `setEnabledHashtagUnderline()`, `setEnabledMentionUnderline()`, `setEnabledEmailAddressUnderline()`, `setEnabledPhoneUnderline()`, `setEnabledWebUrlUnderline()`, `setEnabledDomainNameUnderline()`, `setEnabledIpAddressUnderline()` to `LinkableTextView`.
+- Supported attributes about setter of above.
+
 ## 0.1.2
 - Fixed ANR occurring on API 16~18(Jelly Bean), Api 19(Kitkat).
 
 ## 0.1.1
-- Added `setEnabledLinks()`, `setEnabledHashtag`, `setEnabledMention`, `setEnabledEmailAddress`, `setEnabledPhone`, `setEnabledWebUrl`, `setEnabledDomainName`, `setEnabledIpAddress` to `LinkableTextView`.
+- Added `setEnabledLinks()`, `setEnabledHashtag()`, `setEnabledMention()`, `setEnabledEmailAddress()`, `setEnabledPhone()`, `setEnabledWebUrl()`, `setEnabledDomainName()`, `setEnabledIpAddress()` to `LinkableTextView`.
+- Supported attributes about setter of above.
 
 ## 0.1.0
 - This is first public version.
