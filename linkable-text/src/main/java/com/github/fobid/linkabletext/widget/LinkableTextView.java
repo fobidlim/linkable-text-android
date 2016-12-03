@@ -57,7 +57,7 @@ public class LinkableTextView extends TextView {
     private boolean enabledEmailAddressUnderline = true;
     private boolean enabledPhoneUnderline = true;
     private boolean enabledWebUrlUnderline = true;
-    private boolean enabledIpUnderline = true;
+    private boolean enabledIpAddressUnderline = true;
 
     public LinkableTextView(Context context) {
         super(context);
@@ -95,36 +95,51 @@ public class LinkableTextView extends TextView {
 
             if (attr == R.styleable.LinkableTextView_pattern_mention)
                 mentionPattern = a.getString(attr);
+
             else if (attr == R.styleable.LinkableTextView_pattern_hashtag)
                 hashtagPattern = a.getString(attr);
+
             else if (attr == R.styleable.LinkableTextView_enabledLinks)
                 enabledLinks = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledHashtag)
                 enabledHashtag = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledMention)
                 enabledMention = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledEmail_address)
                 enabledEmailAddress = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledPhone)
                 enabledPhone = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledWeb_url)
                 enabledWebUrl = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledIp_address)
                 enabledIpAddress = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledUnderlines)
                 enabledUnderlines = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledHashtagUnderline)
                 enabledHashtagUnderline = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledMentionUnderline)
                 enabledMentionUnderline = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledEmail_addressUnderline)
                 enabledEmailAddressUnderline = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledPhoneUnderline)
                 enabledPhoneUnderline = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledWeb_urlUnderline)
                 enabledWebUrlUnderline = a.getBoolean(attr, true);
+
             else if (attr == R.styleable.LinkableTextView_enabledIp_addressUnderline)
-                enabledIpUnderline = a.getBoolean(attr, true);
+                enabledIpAddressUnderline = a.getBoolean(attr, true);
         }
         setMentionPattern(mentionPattern);
         setHashtagPattern(hashtagPattern);
@@ -143,7 +158,7 @@ public class LinkableTextView extends TextView {
         setEnabledEmailAddressUnderline(enabledEmailAddressUnderline);
         setEnabledPhoneUnderline(enabledPhoneUnderline);
         setEnabledWebUrlUnderline(enabledWebUrlUnderline);
-        setEnabledIpUnderline(enabledIpUnderline);
+        setEnabledIpAddressUnderline(enabledIpAddressUnderline);
 
         a.recycle();
     }
@@ -284,12 +299,12 @@ public class LinkableTextView extends TextView {
         this.enabledWebUrlUnderline = enabledWebUrlUnderline;
     }
 
-    public boolean isEnabledIpUnderline() {
-        return enabledIpUnderline;
+    public boolean isEnabledIpAddressUnderline() {
+        return enabledIpAddressUnderline;
     }
 
-    public void setEnabledIpUnderline(boolean enabledIpUnderline) {
-        this.enabledIpUnderline = enabledIpUnderline;
+    public void setEnabledIpAddressUnderline(boolean enabledIpAddressUnderline) {
+        this.enabledIpAddressUnderline = enabledIpAddressUnderline;
     }
 
     public void setOnLinkClickListener(@Nullable final OnLinkClickListener listener) {
@@ -340,26 +355,50 @@ public class LinkableTextView extends TextView {
 
         if (enabledLinks) {
             if (enabledUnderlines) {
-                if (enabledHashtag)
+                if (enabledHashtag) {
                     Linkify.addLinks(this, HASHTAG_PATTERN,
                             LinkableMovementMethod.LINKABLE_HASHTAG_SCHEME, null, filter);
 
-                if (enabledMention)
+                    if (!enabledHashtagUnderline)
+                        stripUnderlines();
+                }
+
+                if (enabledMention) {
                     Linkify.addLinks(this, MENTION_PATTERN,
                             LinkableMovementMethod.LINKABLE_MENTION_SCHEME, null, filter);
 
-                if (enabledEmailAddress)
+                    if (!enabledMentionUnderline)
+                        stripUnderlines();
+                }
+
+                if (enabledEmailAddress) {
                     Linkify.addLinks(this, Patterns.EMAIL_ADDRESS, null, null, filter);
 
-                if (enabledPhone)
+                    if (!enabledEmailAddressUnderline)
+                        stripUnderlines();
+                }
+
+                if (enabledPhone) {
                     Linkify.addLinks(this, Patterns.PHONE, null, null, filter);
 
-                if (enabledWebUrl)
+                    if (!enabledPhoneUnderline)
+                        stripUnderlines();
+                }
+
+                if (enabledWebUrl) {
                     Linkify.addLinks(this, Patterns.WEB_URL, null, null, filter);
 
-                if (enabledIpAddress)
+                    if (!enabledWebUrlUnderline)
+                        stripUnderlines();
+                }
+
+                if (enabledIpAddress) {
                     Linkify.addLinks(this, IP_ADDRESS_PATTERN,
                             LinkableMovementMethod.LINKABLE_IP_ADDRESS_SCHEME, null, filter);
+
+                    if (!enabledIpAddressUnderline)
+                        stripUnderlines();
+                }
             } else {
                 if (enabledHashtag)
                     Linkify.addLinks(this, HASHTAG_PATTERN,
