@@ -10,20 +10,20 @@ You can download Linkable Text Sample application on Google Play.
 [![Get it on Google Play](http://www.android.com/images/brand/get_it_on_play_logo_small.png)](https://play.google.com/store/apps/details?id=com.github.fobid.linkabletext.sample)
 
 # Download
-Download [the latest JAR](https://repo1.maven.org/maven2/com/github/fobid/linkable-text/0.1.3/linkable-text-0.1.3.aar) or grab via Maven:
+Download [the latest JAR](https://repo1.maven.org/maven2/com/github/fobid/linkable-text/0.1.4/linkable-text-0.1.4.aar) or grab via Maven:
 
 ```
 <dependency>
   <groupId>com.github.fobid</groupId>
   <artifactId>linkable-text</artifactId>
-  <version>0.1.3</version>
+  <version>0.1.4</version>
 </dependency>
 ```
 
 or Gradle:
 
 ```
-compile 'com.github.fobid:linkable-text:0.1.3'
+compile 'com.github.fobid:linkable-text:0.1.4'
 ```
 
 # Usage
@@ -77,5 +77,5 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-[release-image]: https://img.shields.io/badge/release-v0.1.3-lightgrey.svg
-[release-url]: https://github.com/fobid/linkable-text-android/releases/tag/v0.1.3
+[release-image]: https://img.shields.io/badge/release-v0.1.4-lightgrey.svg
+[release-url]: https://github.com/fobid/linkable-text-android/releases/tag/v0.1.4
