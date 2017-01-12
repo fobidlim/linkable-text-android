@@ -183,7 +183,7 @@ public class LinkableTextView extends TextView {
         if (!TextUtils.isEmpty(hashTagPattern)) {
             HASHTAG_PATTERN = Pattern.compile(hashTagPattern);
         } else {
-            HASHTAG_PATTERN = Pattern.compile("#([A-Za-z0-9_-]+)");
+            HASHTAG_PATTERN = Pattern.compile("#(\\w+)");
         }
     }
 
