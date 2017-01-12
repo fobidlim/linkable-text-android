@@ -11,6 +11,7 @@ You can download Linkable Text Sample application on Google Play.
 
 # Download
 Download [the latest JAR](https://repo1.maven.org/maven2/com/github/fobid/linkable-text/0.1.4/linkable-text-0.1.4.aar) or grab via Maven:
+
 ```
 <dependency>
   <groupId>com.github.fobid</groupId>
@@ -18,23 +19,48 @@ Download [the latest JAR](https://repo1.maven.org/maven2/com/github/fobid/linkab
   <version>0.1.4</version>
 </dependency>
 ```
+
 or Gradle:
+
 ```
 compile 'com.github.fobid:linkable-text:0.1.4'
 ```
 
 # Usage
+
 ```
  <com.github.fobid.linkabletext.widget.LinkableTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 ```
+
 If you don't want to set link, then add `app:enabledLinks="false"` in your xml.
 Or, `LinkableTextView.setEnabledLinks(false)` in your code.
 
 You must call `LinkableTextView.setOnLinkClickListener()` after `setText()` to set links  clickable.
 
+# Attributes
+
+```
+<com.github.fobid.linkabletext.widget.LinkableTextView
+		xmlns:linkable="http://schemas.android.com/apk/res-auto"
+        android:id="@android:id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        linkable:enabledLinks="false" />
+
+```
+
+You can make all links to be disabled with `enabledLinks=false` in your layout xml or `setEnabledLinks(false)` in your code.
+Every links are able to be set disabled on each.
+
+If you remove all of underlines, then use `enabledUnderlines=false` in your layout xml or `setEnabledUnderlines(false)` in your code.
+It is also supported to each links.
+
+Default value of all links and underlines is `true`
+
 # License
+
 ```
 Copyright 2016 Fobid
 
