@@ -1,3 +1,6 @@
+## 0.1.4
+- Supported hashtag for other languages
+
 ## 0.1.3
 - Added `setEnabledUnderlines()`, `setEnabledHashtagUnderline()`, `setEnabledMentionUnderline()`, `setEnabledEmailAddressUnderline()`, `setEnabledPhoneUnderline()`, `setEnabledWebUrlUnderline()`, `setEnabledDomainNameUnderline()`, `setEnabledIpAddressUnderline()` to `LinkableTextView`.
 - Supported attributes about setter of above.
