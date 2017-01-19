@@ -9,6 +9,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
 import com.github.fobid.linkabletext.sample.R;
 import com.github.fobid.linkabletext.view.OnLinkClickListener;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
@@ -17,9 +21,44 @@ import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements OnLinkClickListener {
 
+    private InterstitialAd interstitialAd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Instantiate an InterstitialAd object
+        interstitialAd = new InterstitialAd(this, "101094783737704_101116820402167");
+        interstitialAd.setAdListener(new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+                // Interstitial displayed callback
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+                // Interstitial dismissed callback
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Show the ad when it's done loading.
+                interstitialAd.show();
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+            }
+        });
+
+        // Load the interstitial ad
+        interstitialAd.loadAd();
+
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.a_main);
 
@@ -79,5 +118,13 @@ public class MainActivity extends AppCompatActivity implements OnLinkClickListen
     @Override
     public void onPhoneClick(String phone) {
         Toast.makeText(this, "Clicked phone is " + phone, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (interstitialAd != null) {
+            interstitialAd.destroy();
+        }
+        super.onDestroy();
     }
 }

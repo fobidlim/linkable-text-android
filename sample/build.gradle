@@ -27,12 +27,12 @@ android {
             storePassword properties.getProperty("KEYSTORE_PASSWORD")
         }
     }
-    compileSdkVersion 24
-    buildToolsVersion "25.0.0"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.github.fobid.linkabletext.sample"
-        minSdkVersion 9
-        targetSdkVersion 24
+        minSdkVersion 15
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 3
         versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -58,4 +58,5 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
         transitive = true;
     }
+    compile 'com.facebook.android:audience-network-sdk:4.+'
 }
