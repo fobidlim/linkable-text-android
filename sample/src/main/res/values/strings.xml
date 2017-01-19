@@ -3,4 +3,8 @@
     <string name="listview">ListView</string>
     <string name="recyclerview">RecyclerView</string>
     <string name="menu_overflow">More</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3893540164578089/6619601459</string>
+    <string name="admob_list_bottom_banner_unit_id">ca-app-pub-3893540164578089/5642395858</string>
+    <string name="admob_recycler_bottom_banner_unit_id">ca-app-pub-3893540164578089/8456261458</string>
 </resources>

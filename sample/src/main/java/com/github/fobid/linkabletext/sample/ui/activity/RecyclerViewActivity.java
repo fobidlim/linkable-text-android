@@ -14,6 +14,9 @@ import android.widget.Toast;
 import com.github.fobid.linkabletext.sample.R;
 import com.github.fobid.linkabletext.view.OnLinkClickListener;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 
@@ -23,12 +26,22 @@ import java.util.ArrayList;
 
 public class RecyclerViewActivity extends AppCompatActivity {
 
+    private AdView mAdView;
     private ArrayList<String> mLinkList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_recycler_view);
+
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3893540164578089/8456261458");
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)        // All emulators
+                .addTestDevice("B05EA171BA1EACADD3DFF94B87E35314")  // An example device ID
+                .build();
+        mAdView.loadAd(adRequest);
 
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

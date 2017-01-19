@@ -16,12 +16,16 @@ import com.facebook.ads.InterstitialAdListener;
 import com.github.fobid.linkabletext.sample.R;
 import com.github.fobid.linkabletext.view.OnLinkClickListener;
 import com.github.fobid.linkabletext.widget.LinkableTextView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements OnLinkClickListener {
 
     private InterstitialAd interstitialAd;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,15 @@ public class MainActivity extends AppCompatActivity implements OnLinkClickListen
 
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.a_main);
+
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3893540164578089/6619601459");
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)        // All emulators
+                .addTestDevice("B05EA171BA1EACADD3DFF94B87E35314")  // An example device ID
+                .build();
+        mAdView.loadAd(adRequest);
 
         LinkableTextView textView = (LinkableTextView) findViewById(android.R.id.text1);
         textView.setHighlightColor(Color.TRANSPARENT);
