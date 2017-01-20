@@ -11,7 +11,6 @@ buildscript {
         // in the individual module build.gradle files
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-        classpath 'com.google.gms:google-services:3.0.0'
     }
 }
 
