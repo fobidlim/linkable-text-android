@@ -35,7 +35,7 @@ android {
         applicationId "com.github.fobid.linkabletext.sample"
         minSdkVersion 16
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
+        versionCode 4
         versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
