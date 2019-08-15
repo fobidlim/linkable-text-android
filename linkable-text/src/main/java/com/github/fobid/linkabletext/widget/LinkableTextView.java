@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
-import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -14,6 +13,8 @@ import android.text.util.Linkify;
 import android.util.AttributeSet;
 import android.util.Patterns;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.github.fobid.linkabletext.R;
 import com.github.fobid.linkabletext.annotation.LinkType;
