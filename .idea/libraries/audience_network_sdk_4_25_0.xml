@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="audience-network-sdk-4.25.0">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/sample/build/intermediates/exploded-aar/com.facebook.android/audience-network-sdk/4.25.0/res" />
+      <root url="jar://$PROJECT_DIR$/sample/build/intermediates/exploded-aar/com.facebook.android/audience-network-sdk/4.25.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
