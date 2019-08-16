@@ -3,10 +3,11 @@ package com.github.fobid.linkabletext.sample.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.fobid.linkabletext.sample.R;
@@ -26,10 +27,10 @@ public class MainActivity extends AppCompatActivity implements OnLinkClickListen
         LinkableTextView textView = (LinkableTextView) findViewById(android.R.id.text1);
         textView.setHighlightColor(Color.TRANSPARENT);
 
-        String text = "https://github.com/fobid/linkable-text-android is #github #repository of linkable-text.\n" +
-                "blog.fobid.me is my #blog.\n" +
+        String text = "https://github.com/fobidlim/linkable-text-android is #github #repository of linkable-text.\n" +
+                "blog.jameslim.kr is my #blog.\n" +
                 "You can contact me via #instagram @fobidlim or email.\n" +
-                "Here is my email address. fobidbumz@gmail.com\n" +
+                "Here is my email address. fobidlim@gmail.com\n" +
                 "And 010-0000-0000 is my phone number.\n" +
                 "Thank you.";
         textView.setText(text);

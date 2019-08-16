@@ -3,17 +3,37 @@ package com.github.fobid.linkabletext.widget
 import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
+import android.text.SpannableString
+import android.text.method.MovementMethod
+import android.text.style.URLSpan
+import android.text.util.Linkify
 import android.util.AttributeSet
-import android.widget.TextView
+import android.util.Patterns
 import androidx.appcompat.widget.AppCompatTextView
 import com.github.fobid.linkabletext.R
+import com.github.fobid.linkabletext.text.method.LinkableMovementMethod
+import com.github.fobid.linkabletext.view.LinkableCallback
+import com.github.fobid.linkabletext.view.OnLinkClickListener
 import java.util.regex.Pattern
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 class LinkableTextView(context: Context,
                        attrs: AttributeSet? = null,
-                       defStyleAttr: Int = 0
+                       defStyleAttr: Int
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
+
+    constructor(context: Context) : this(context, null)
+
+    constructor(context: Context, attrs: AttributeSet? = null) : this(context, attrs, 0)
+
+    object Link {
+        const val HASH_TAG = 0x1
+        const val MENTION = 0x2
+        const val EMAIL_ADDRESS = 0x3
+        const val PHONE = 0x4
+        const val WEB_URL = 0x5
+        const val IP_ADDRESS = 0x6
+    }
 
     private var enabledLinks = true
     private var enabledHashtag = true
@@ -171,7 +191,145 @@ class LinkableTextView(context: Context,
         this.enabledIpAddressUnderline = enabledIpAddressUnderline
     }
 
+    fun setOnLinkClickListener(listener: OnLinkClickListener?) {
+        setOnLinkClickListener(object : LinkableCallback {
+            override fun onMatch(type: Int, value: String) {
+                listener?.let {
+                    if (!enabledLinks) {
+                        return
+                    }
+
+                    when (type) {
+                        Link.HASH_TAG ->
+                            if (enabledHashtag) {
+                                listener.onHashtagClick(value)
+                            }
+                        Link.MENTION ->
+                            if (enabledMention) {
+                                listener.onMentionClick(value)
+                            }
+                        Link.EMAIL_ADDRESS ->
+                            if (enabledEmailAddress) {
+                                listener.onEmailAddressClick(value)
+                            }
+                        Link.IP_ADDRESS ->
+                            if (enabledIpAddress) {
+                                listener.onWebUrlClick(value)
+                            }
+                        Link.WEB_URL ->
+                            if (enabledWebUrl) {
+                                listener.onWebUrlClick(value)
+                            }
+                        Link.PHONE ->
+                            if (enabledPhone) {
+                                listener.onPhoneClick(value)
+                            }
+                    }
+                }
+            }
+
+        })
+    }
+
+    fun setOnLinkClickListener(callback: LinkableCallback?) {
+        val filter = Linkify.TransformFilter { match, _ -> match.group() }
+
+        if (enabledLinks) {
+            if (enabledUnderlines) {
+                if (enabledHashtag) {
+                    Linkify.addLinks(this, HASHTAG_PATTERN,
+                            LinkableMovementMethod.LINKABLE_HASHTAG_SCHEME, null, filter)
+
+                    if (!enabledHashtagUnderline)
+                        stripUnderlines()
+                }
+
+                if (enabledMention) {
+                    Linkify.addLinks(this, MENTION_PATTERN,
+                            LinkableMovementMethod.LINKABLE_MENTION_SCHEME, null, filter)
+
+                    if (!enabledMentionUnderline)
+                        stripUnderlines()
+                }
+
+                if (enabledEmailAddress) {
+                    Linkify.addLinks(this, Patterns.EMAIL_ADDRESS, null, null, filter)
+
+                    if (!enabledEmailAddressUnderline)
+                        stripUnderlines()
+                }
+
+                if (enabledPhone) {
+                    Linkify.addLinks(this, Patterns.PHONE, null, null, filter)
+
+                    if (!enabledPhoneUnderline)
+                        stripUnderlines()
+                }
+
+                if (enabledWebUrl) {
+                    Linkify.addLinks(this, Patterns.WEB_URL, null, null, filter)
+
+                    if (!enabledWebUrlUnderline)
+                        stripUnderlines()
+                }
+
+                if (enabledIpAddress) {
+                    Linkify.addLinks(this, IP_ADDRESS_PATTERN,
+                            LinkableMovementMethod.LINKABLE_IP_ADDRESS_SCHEME, null, filter)
+
+                    if (!enabledIpAddressUnderline)
+                        stripUnderlines()
+                }
+            } else {
+                if (enabledHashtag)
+                    Linkify.addLinks(this, HASHTAG_PATTERN,
+                            LinkableMovementMethod.LINKABLE_HASHTAG_SCHEME, null, filter)
+
+                if (enabledMention)
+                    Linkify.addLinks(this, MENTION_PATTERN,
+                            LinkableMovementMethod.LINKABLE_MENTION_SCHEME, null, filter)
+
+                if (enabledEmailAddress)
+                    Linkify.addLinks(this, Patterns.EMAIL_ADDRESS, null, null, filter)
+
+                if (enabledPhone)
+                    Linkify.addLinks(this, Patterns.PHONE, null, null, filter)
+
+                if (enabledWebUrl)
+                    Linkify.addLinks(this, Patterns.WEB_URL, null, null, filter)
+
+                if (enabledIpAddress)
+                    Linkify.addLinks(this, IP_ADDRESS_PATTERN,
+                            LinkableMovementMethod.LINKABLE_IP_ADDRESS_SCHEME, null, filter)
+
+                stripUnderlines()
+            }
+        }
+
+        var movementMethod: MovementMethod? = null
+        if (callback != null) {
+            movementMethod = LinkableMovementMethod(callback)
+        }
+        setMovementMethod(movementMethod)
+    }
+
+    private fun stripUnderlines() {
+        val spannableString = SpannableString(text)
+
+        spannableString.getSpans(0, spannableString.length, URLSpan::class.java).let { spans ->
+            for (span in spans) {
+                val start = spannableString.getSpanStart(span)
+                val end = spannableString.getSpanEnd(span)
+                spannableString.removeSpan(span)
+                spannableString.setSpan(URLSpanNoUnderline(span.url), start, end, 0)
+            }
+        }
+
+        text = spannableString
+    }
+
     companion object {
+        private val IP_ADDRESS_PATTERN: Pattern = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$")
         private lateinit var MENTION_PATTERN: Pattern
         private lateinit var HASHTAG_PATTERN: Pattern
     }

@@ -8,6 +8,9 @@ buildscript {
     }
 }
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.fabric'
 
 repositories {
@@ -19,14 +22,14 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
-    signingConfigs {
-        release {
-            keyAlias properties.getProperty("KEY_ALIAS")
-            keyPassword properties.getProperty("KEY_PASSWORD")
-            storeFile file(properties.getProperty("KEYSTORE_PATH"))
-            storePassword properties.getProperty("KEYSTORE_PASSWORD")
-        }
-    }
+//    signingConfigs {
+//        release {
+//            keyAlias properties.getProperty("KEY_ALIAS")
+//            keyPassword properties.getProperty("KEY_PASSWORD")
+//            storeFile file(properties.getProperty("KEYSTORE_PATH"))
+//            storePassword properties.getProperty("KEYSTORE_PASSWORD")
+//        }
+//    }
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.github.fobid.linkabletext.sample"
@@ -40,21 +43,19 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
     }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    compile "com.android.support:recyclerview-v7:${supportLibVersion}"
-    testCompile 'junit:junit:4.12'
-    compile project(':linkable-text')
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation "androidx.recyclerview:recyclerview:1.1.0-beta03"
+    testImplementation 'junit:junit:4.12'
+    implementation project(':linkable-text')
+    implementation('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
         transitive = true;
     }
 }
