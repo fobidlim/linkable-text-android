@@ -1,13 +1,13 @@
 package com.github.fobid.linkabletext.sample.ui.activity
 
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.crashlytics.android.Crashlytics
 import com.github.fobid.linkabletext.sample.R
 import com.github.fobid.linkabletext.sample.databinding.AMainBinding

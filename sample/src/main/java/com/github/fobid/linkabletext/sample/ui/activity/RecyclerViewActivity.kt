@@ -1,12 +1,12 @@
 package com.github.fobid.linkabletext.sample.ui.activity
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.github.fobid.linkabletext.sample.R
 import com.github.fobid.linkabletext.sample.databinding.IListBinding
