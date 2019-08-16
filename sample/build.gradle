@@ -22,28 +22,28 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
-//    signingConfigs {
-//        release {
-//            keyAlias properties.getProperty("KEY_ALIAS")
-//            keyPassword properties.getProperty("KEY_PASSWORD")
-//            storeFile file(properties.getProperty("KEYSTORE_PATH"))
-//            storePassword properties.getProperty("KEYSTORE_PASSWORD")
-//        }
-//    }
+    signingConfigs {
+        release {
+            keyAlias properties.getProperty("KEY_ALIAS")
+            keyPassword properties.getProperty("KEY_PASSWORD")
+            storeFile file(properties.getProperty("KEYSTORE_PATH"))
+            storePassword properties.getProperty("KEYSTORE_PASSWORD")
+        }
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.github.fobid.linkabletext.sample"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "1.2"
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
         }
     }
     androidExtensions {
@@ -64,6 +64,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation project(':linkable-text')
     implementation('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
-        transitive = true;
+        transitive = true
     }
 }
