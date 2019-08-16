@@ -43,10 +43,6 @@ class MainActivity : AppCompatActivity(), OnLinkClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_listview -> {
-                startActivity(Intent(this, ListViewActivity::class.java))
-                true
-            }
             R.id.menu_recyclerview -> {
                 startActivity(Intent(this, RecyclerViewActivity::class.java))
                 true
