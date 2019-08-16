@@ -8,8 +8,8 @@ apply plugin: 'signing'
 
 version = '0.1.4'
 
-def siteUrl = 'https://github.com/fobid/linkable-text-android'       // Homepage URL of the library
-def gitUrl = 'https://github.com/fobid/linkable-text-android.git'    // Git repository URL
+def siteUrl = 'https://github.com/fobidlim/linkable-text-android'       // Homepage URL of the library
+def gitUrl = 'https://github.com/fobidlim/linkable-text-android.git'    // Git repository URL
 group = "com.github.fobid"                                  // Maven Group ID for the artifact
 
 android {
@@ -53,9 +53,9 @@ install {
                 }
                 developers {
                     developer {
-                        id 'fobid'
-                        name 'fobid'
-                        email 'fobidbumz@gmail.com'
+                        id 'fobidlim'
+                        name 'fobidlim'
+                        email 'fobidlim@gmail.com'
                     }
                 }
                 scm {
@@ -104,7 +104,7 @@ bintray {
         licenses = ["Apache-2.0"]
         publish = true
 
-        githubRepo = 'fobid/linkable-text-android'
+        githubRepo = 'fobidlim/linkable-text-android'
         githubReleaseNotesFile = 'CHANGELOG.md'
 
         version {
