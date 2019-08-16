@@ -10,6 +10,9 @@ buildscript {
     }
 }
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.fabric'
 
 repositories {
@@ -30,14 +33,13 @@ android {
         }
     }
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.github.fobid.linkabletext.sample"
-        minSdkVersion 16
+        minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 4
-        versionName "1.2"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -46,18 +48,25 @@ android {
             signingConfig signingConfigs.release
         }
     }
+    androidExtensions {
+        experimental = true
+    }
+    dataBinding{
+        enabled = true
+    }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    compile "com.android.support:recyclerview-v7:${supportLibVersion}"
-    compile project(':linkable-text')
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
-        transitive = true;
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation "androidx.recyclerview:recyclerview:1.1.0-beta03"
+    testImplementation 'junit:junit:4.12'
+    implementation project(':linkable-text')
+    implementation('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
+        transitive = true
     }
     compile 'com.facebook.android:audience-network-sdk:4.+'
     compile 'com.google.firebase:firebase-ads:10.0.1'

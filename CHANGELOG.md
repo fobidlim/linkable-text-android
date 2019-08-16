@@ -1,3 +1,6 @@
+## 0.2.0
+- Supported androidX and converted to Kotlin
+
 ## 0.1.4
 - Supported hashtag for other languages
 

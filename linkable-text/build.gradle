@@ -1,25 +1,27 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'signing'
 
-version = '0.1.4'
+version = '0.2.0'
 
-def siteUrl = 'https://github.com/fobid/linkable-text-android'       // Homepage URL of the library
-def gitUrl = 'https://github.com/fobid/linkable-text-android.git'    // Git repository URL
+def siteUrl = 'https://github.com/fobidlim/linkable-text-android'       // Homepage URL of the library
+def gitUrl = 'https://github.com/fobidlim/linkable-text-android.git'    // Git repository URL
 group = "com.github.fobid"                                  // Maven Group ID for the artifact
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 4
-        versionName version
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -51,9 +53,9 @@ install {
                 }
                 developers {
                     developer {
-                        id 'fobid'
-                        name 'fobid'
-                        email 'fobidbumz@gmail.com'
+                        id 'fobidlim'
+                        name 'fobidlim'
+                        email 'fobidlim@gmail.com'
                     }
                 }
                 scm {
@@ -64,25 +66,6 @@ install {
             }
         }
     }
-}
-
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-artifacts {
-    archives javadocJar
-    archives sourcesJar
 }
 
 Properties properties = new Properties()
@@ -102,7 +85,7 @@ bintray {
         licenses = ["Apache-2.0"]
         publish = true
 
-        githubRepo = 'fobid/linkable-text-android'
+        githubRepo = 'fobidlim/linkable-text-android'
         githubReleaseNotesFile = 'CHANGELOG.md'
 
         version {
@@ -121,10 +104,10 @@ bintray {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    testCompile 'junit:junit:4.12'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'junit:junit:4.12'
 }
