@@ -17,14 +17,11 @@ import com.github.fobid.linkabletext.view.OnLinkClickListener
 import java.util.regex.Pattern
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-class LinkableTextView(context: Context,
-                       attrs: AttributeSet? = null,
-                       defStyleAttr: Int
+class LinkableTextView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
-
-    constructor(context: Context) : this(context, null)
-
-    constructor(context: Context, attrs: AttributeSet? = null) : this(context, attrs, 0)
 
     object Link {
         const val HASH_TAG = 0x1
@@ -56,83 +53,86 @@ class LinkableTextView(context: Context,
         var hashtagPattern = ""
 
         context.obtainStyledAttributes(attrs, R.styleable.LinkableTextView)
-                .also {
-                    for (i in 0 until it.indexCount) {
+            .also {
+                for (i in 0 until it.indexCount) {
 
-                        when (val attr = it.getIndex(i)) {
-                            R.styleable.LinkableTextView_pattern_mention ->
-                                mentionPattern = it.getString(attr) ?: ""
-                            R.styleable.LinkableTextView_pattern_hashtag ->
-                                hashtagPattern = it.getString(attr) ?: ""
-                            R.styleable.LinkableTextView_enabledLinks ->
-                                enabledLinks = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledHashtag ->
-                                enabledHashtag = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledMention ->
-                                enabledMention = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledEmail_address ->
-                                enabledEmailAddress = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledPhone ->
-                                enabledPhone = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledPhone ->
-                                enabledPhone = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledWeb_url ->
-                                enabledWebUrl = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledIp_address ->
-                                enabledIpAddress = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledUnderlines ->
-                                enabledUnderlines = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledHashtagUnderline ->
-                                enabledHashtagUnderline = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledMentionUnderline ->
-                                enabledMentionUnderline = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledEmail_addressUnderline ->
-                                enabledEmailAddressUnderline = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledPhoneUnderline ->
-                                enabledPhoneUnderline = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledWeb_urlUnderline ->
-                                enabledWebUrlUnderline = it.getBoolean(attr, true)
-                            R.styleable.LinkableTextView_enabledIp_addressUnderline ->
-                                enabledIpAddressUnderline = it.getBoolean(attr, true)
-                        }
+                    when (val attr = it.getIndex(i)) {
+                        R.styleable.LinkableTextView_pattern_mention ->
+                            mentionPattern = it.getString(attr) ?: ""
+                        R.styleable.LinkableTextView_pattern_hashtag ->
+                            hashtagPattern = it.getString(attr) ?: ""
+                        R.styleable.LinkableTextView_enabledLinks ->
+                            enabledLinks = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledHashtag ->
+                            enabledHashtag = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledMention ->
+                            enabledMention = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledEmail_address ->
+                            enabledEmailAddress = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledPhone ->
+                            enabledPhone = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledPhone ->
+                            enabledPhone = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledWeb_url ->
+                            enabledWebUrl = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledIp_address ->
+                            enabledIpAddress = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledUnderlines ->
+                            enabledUnderlines = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledHashtagUnderline ->
+                            enabledHashtagUnderline = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledMentionUnderline ->
+                            enabledMentionUnderline = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledEmail_addressUnderline ->
+                            enabledEmailAddressUnderline = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledPhoneUnderline ->
+                            enabledPhoneUnderline = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledWeb_urlUnderline ->
+                            enabledWebUrlUnderline = it.getBoolean(attr, true)
+                        R.styleable.LinkableTextView_enabledIp_addressUnderline ->
+                            enabledIpAddressUnderline = it.getBoolean(attr, true)
                     }
-
-                    setMentionPattern(mentionPattern)
-                    setHashtagPattern(hashtagPattern)
-
-                    setEnabledLinks(enabledLinks)
-                    setEnabledHashtag(enabledHashtag)
-                    setEnabledMention(enabledMention)
-                    setEnabledEmailAddress(enabledEmailAddress)
-                    setEnabledPhone(enabledPhone)
-                    setEnabledWebUrl(enabledWebUrl)
-                    setEnabledIpAddress(enabledIpAddress)
-
-                    setEnabledUnderlines(enabledUnderlines)
-                    setEnabledHashtagUnderline(enabledHashtagUnderline)
-                    setEnabledMentionUnderline(enabledMentionUnderline)
-                    setEnabledEmailAddressUnderline(enabledEmailAddressUnderline)
-                    setEnabledPhoneUnderline(enabledPhoneUnderline)
-                    setEnabledWebUrlUnderline(enabledWebUrlUnderline)
-                    setEnabledIpAddressUnderline(enabledIpAddressUnderline)
-
-                }.apply {
-                    recycle()
                 }
+
+                setMentionPattern(mentionPattern)
+                setHashtagPattern(hashtagPattern)
+
+                setEnabledLinks(enabledLinks)
+                setEnabledHashtag(enabledHashtag)
+                setEnabledMention(enabledMention)
+                setEnabledEmailAddress(enabledEmailAddress)
+                setEnabledPhone(enabledPhone)
+                setEnabledWebUrl(enabledWebUrl)
+                setEnabledIpAddress(enabledIpAddress)
+
+                setEnabledUnderlines(enabledUnderlines)
+                setEnabledHashtagUnderline(enabledHashtagUnderline)
+                setEnabledMentionUnderline(enabledMentionUnderline)
+                setEnabledEmailAddressUnderline(enabledEmailAddressUnderline)
+                setEnabledPhoneUnderline(enabledPhoneUnderline)
+                setEnabledWebUrlUnderline(enabledWebUrlUnderline)
+                setEnabledIpAddressUnderline(enabledIpAddressUnderline)
+            }.apply {
+                recycle()
+            }
     }
 
     fun setMentionPattern(mentionPattern: String) {
-        MENTION_PATTERN = when (mentionPattern.isNotEmpty()) {
-            true -> Pattern.compile(mentionPattern)
-            else -> Pattern.compile("@([A-Za-z0-9_-]+)")
-        }
+        MENTION_PATTERN = Pattern.compile(
+            when (mentionPattern.isNotEmpty()) {
+                true -> mentionPattern
+                else -> "@([A-Za-z0-9_-]+)"
+            }
+        )
     }
 
     fun setHashtagPattern(hashtagPattern: String) {
-        HASHTAG_PATTERN = when (hashtagPattern.isNotEmpty()) {
-            true -> Pattern.compile(hashtagPattern)
-            else -> Pattern.compile("#(\\w+)")
-        }
+        HASHTAG_PATTERN = Pattern.compile(
+            when (hashtagPattern.isNotEmpty()) {
+                true -> hashtagPattern
+                else -> "#(\\w+)"
+            }
+        )
     }
 
     fun setEnabledLinks(enabledLinks: Boolean) {
@@ -191,7 +191,7 @@ class LinkableTextView(context: Context,
         this.enabledIpAddressUnderline = enabledIpAddressUnderline
     }
 
-    fun setOnLinkClickListener(listener: OnLinkClickListener?) {
+    fun setOnLinkClickListener(listener: OnLinkClickListener?) =
         setOnLinkClickListener(object : LinkableCallback {
             override fun onMatch(type: Int, value: String) {
                 listener?.let {
@@ -227,9 +227,7 @@ class LinkableTextView(context: Context,
                     }
                 }
             }
-
         })
-    }
 
     fun setOnLinkClickListener(callback: LinkableCallback?) {
         val filter = Linkify.TransformFilter { match, _ -> match.group() }
@@ -237,16 +235,26 @@ class LinkableTextView(context: Context,
         if (enabledLinks) {
             if (enabledUnderlines) {
                 if (enabledHashtag) {
-                    Linkify.addLinks(this, HASHTAG_PATTERN,
-                            LinkableMovementMethod.LINKABLE_HASHTAG_SCHEME, null, filter)
+                    Linkify.addLinks(
+                        this,
+                        HASHTAG_PATTERN,
+                        LinkableMovementMethod.LINKABLE_HASHTAG_SCHEME,
+                        null,
+                        filter
+                    )
 
                     if (!enabledHashtagUnderline)
                         stripUnderlines()
                 }
 
                 if (enabledMention) {
-                    Linkify.addLinks(this, MENTION_PATTERN,
-                            LinkableMovementMethod.LINKABLE_MENTION_SCHEME, null, filter)
+                    Linkify.addLinks(
+                        this,
+                        MENTION_PATTERN,
+                        LinkableMovementMethod.LINKABLE_MENTION_SCHEME,
+                        null,
+                        filter
+                    )
 
                     if (!enabledMentionUnderline)
                         stripUnderlines()
@@ -274,20 +282,35 @@ class LinkableTextView(context: Context,
                 }
 
                 if (enabledIpAddress) {
-                    Linkify.addLinks(this, IP_ADDRESS_PATTERN,
-                            LinkableMovementMethod.LINKABLE_IP_ADDRESS_SCHEME, null, filter)
+                    Linkify.addLinks(
+                        this,
+                        IP_ADDRESS_PATTERN,
+                        LinkableMovementMethod.LINKABLE_IP_ADDRESS_SCHEME,
+                        null,
+                        filter
+                    )
 
                     if (!enabledIpAddressUnderline)
                         stripUnderlines()
                 }
             } else {
                 if (enabledHashtag)
-                    Linkify.addLinks(this, HASHTAG_PATTERN,
-                            LinkableMovementMethod.LINKABLE_HASHTAG_SCHEME, null, filter)
+                    Linkify.addLinks(
+                        this,
+                        HASHTAG_PATTERN,
+                        LinkableMovementMethod.LINKABLE_HASHTAG_SCHEME,
+                        null,
+                        filter
+                    )
 
                 if (enabledMention)
-                    Linkify.addLinks(this, MENTION_PATTERN,
-                            LinkableMovementMethod.LINKABLE_MENTION_SCHEME, null, filter)
+                    Linkify.addLinks(
+                        this,
+                        MENTION_PATTERN,
+                        LinkableMovementMethod.LINKABLE_MENTION_SCHEME,
+                        null,
+                        filter
+                    )
 
                 if (enabledEmailAddress)
                     Linkify.addLinks(this, Patterns.EMAIL_ADDRESS, null, null, filter)
@@ -299,8 +322,13 @@ class LinkableTextView(context: Context,
                     Linkify.addLinks(this, Patterns.WEB_URL, null, null, filter)
 
                 if (enabledIpAddress)
-                    Linkify.addLinks(this, IP_ADDRESS_PATTERN,
-                            LinkableMovementMethod.LINKABLE_IP_ADDRESS_SCHEME, null, filter)
+                    Linkify.addLinks(
+                        this,
+                        IP_ADDRESS_PATTERN,
+                        LinkableMovementMethod.LINKABLE_IP_ADDRESS_SCHEME,
+                        null,
+                        filter
+                    )
 
                 stripUnderlines()
             }
@@ -329,7 +357,8 @@ class LinkableTextView(context: Context,
     }
 
     companion object {
-        private val IP_ADDRESS_PATTERN: Pattern = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$")
+        private val IP_ADDRESS_PATTERN: Pattern =
+            Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$")
         private lateinit var MENTION_PATTERN: Pattern
         private lateinit var HASHTAG_PATTERN: Pattern
     }

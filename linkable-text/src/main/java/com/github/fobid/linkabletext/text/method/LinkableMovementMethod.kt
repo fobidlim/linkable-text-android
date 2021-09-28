@@ -11,7 +11,7 @@ import com.github.fobid.linkabletext.view.LinkableCallback
 import com.github.fobid.linkabletext.widget.LinkableTextView
 
 class LinkableMovementMethod(
-        private var linkableCallback: LinkableCallback? = null
+    private var linkableCallback: LinkableCallback? = null
 ) : LinkMovementMethod() {
 
     init {
@@ -24,31 +24,32 @@ class LinkableMovementMethod(
     }
 
     override fun onTouchEvent(widget: TextView?, buffer: Spannable?, event: MotionEvent?): Boolean {
-
-        if (event?.action == MotionEvent.ACTION_UP) {
+        if (widget == null || buffer == null || event == null) {
+            return super.onTouchEvent(widget, buffer, event)
+        }
+        if (event.action == MotionEvent.ACTION_UP) {
             var x = event.x.toInt()
             var y = event.y.toInt()
 
-            x -= widget?.totalPaddingLeft ?: 0
-            y -= widget?.totalPaddingTop ?: 0
+            x -= widget.totalPaddingLeft
+            y -= widget.totalPaddingTop
 
-            x += widget?.scrollX ?: 0
-            y += widget?.scrollY ?: 0
+            x += widget.scrollX
+            y += widget.scrollY
 
-            val layout = widget?.layout
+            val layout = widget.layout
             val line = layout?.getLineForVertical(y) ?: 0
             val off = layout?.getOffsetForHorizontal(line, x.toFloat()) ?: 0
 
-            val link = buffer?.getSpans(off, off, URLSpan::class.java)
-            link?.let {
-                if (link.isNotEmpty()) {
-                    val url = link[0].url
+            val link = buffer.getSpans(off, off, URLSpan::class.java)
+            if (link.isNotEmpty()) {
+                link.firstOrNull()?.url?.let { url ->
                     handleLink(url)
-
-                    // Remove selected background
-                    Selection.removeSelection(buffer)
-                    return true
                 }
+
+                // Remove selected background
+                Selection.removeSelection(buffer)
+                return true
             }
         }
 
@@ -57,39 +58,44 @@ class LinkableMovementMethod(
 
     private fun handleLink(link: String) {
         when {
-            link.startsWith(LINKABLE_HASHTAG_SCHEME) -> {
-                var hashtag = link.replaceFirst(LINKABLE_HASHTAG_SCHEME.toRegex(), "")
-                hashtag = hashtag.replaceFirst(".*#".toRegex(), "")
-                linkableCallback?.onMatch(LinkableTextView.Link.HASH_TAG, hashtag)
-            }
-            link.startsWith(LINKABLE_MENTION_SCHEME) -> {
-                var mention = link.replaceFirst(LINKABLE_MENTION_SCHEME.toRegex(), "")
-                mention = mention.replaceFirst(".*@".toRegex(), "")
-                linkableCallback?.onMatch(LinkableTextView.Link.MENTION, mention)
-            }
-            link.startsWith(LINKABLE_IP_ADDRESS_SCHEME) -> {
-                var ip = link.replaceFirst(LINKABLE_IP_ADDRESS_SCHEME.toRegex(), "")
-                ip = ip.replaceFirst(".".toRegex(), "")
-                linkableCallback?.onMatch(LinkableTextView.Link.IP_ADDRESS, ip)
-            }
-            Patterns.EMAIL_ADDRESS.matcher(link).matches() -> {
+            link.startsWith(LINKABLE_HASHTAG_SCHEME) ->
+                link.replaceFirst(LINKABLE_HASHTAG_SCHEME, "")
+                    .replaceFirst(".*#".toRegex(), "")
+                    .let { hashtag ->
+                        linkableCallback?.onMatch(LinkableTextView.Link.HASH_TAG, hashtag)
+                    }
+
+            link.startsWith(LINKABLE_MENTION_SCHEME) ->
+                link.replaceFirst(LINKABLE_MENTION_SCHEME, "")
+                    .replaceFirst(".*@".toRegex(), "")
+                    .let { mention ->
+                        linkableCallback?.onMatch(LinkableTextView.Link.MENTION, mention)
+                    }
+
+            link.startsWith(LINKABLE_IP_ADDRESS_SCHEME) ->
+                link.replaceFirst(LINKABLE_IP_ADDRESS_SCHEME, "")
+                    .replaceFirst(".".toRegex(), "")
+                    .let { ip ->
+                        linkableCallback?.onMatch(LinkableTextView.Link.IP_ADDRESS, ip)
+                    }
+
+            Patterns.EMAIL_ADDRESS.matcher(link).matches() ->
                 linkableCallback?.onMatch(LinkableTextView.Link.EMAIL_ADDRESS, link)
-            }
+
             Patterns.IP_ADDRESS.matcher(link).matches()
                     or Patterns.DOMAIN_NAME.matcher(link).matches()
-                    or Patterns.WEB_URL.matcher(link).matches() -> {
+                    or Patterns.WEB_URL.matcher(link).matches() ->
                 linkableCallback?.onMatch(LinkableTextView.Link.WEB_URL, link)
-            }
-            Patterns.PHONE.matcher(link).matches() -> {
+
+            Patterns.PHONE.matcher(link).matches() ->
                 linkableCallback?.onMatch(LinkableTextView.Link.PHONE, link)
-            }
         }
     }
 
     companion object {
-        private val LINKABLE_BASE_SCHEME = "https://github.com/fobidlim/linkable-text-android"
-        val LINKABLE_HASHTAG_SCHEME = "$LINKABLE_BASE_SCHEME/hashtag"
-        val LINKABLE_MENTION_SCHEME = "$LINKABLE_BASE_SCHEME/mention"
-        val LINKABLE_IP_ADDRESS_SCHEME = "$LINKABLE_BASE_SCHEME/ip"
+        private const val LINKABLE_BASE_SCHEME = "https://github.com/fobidlim/linkable-text-android"
+        const val LINKABLE_HASHTAG_SCHEME = "$LINKABLE_BASE_SCHEME/hashtag"
+        const val LINKABLE_MENTION_SCHEME = "$LINKABLE_BASE_SCHEME/mention"
+        const val LINKABLE_IP_ADDRESS_SCHEME = "$LINKABLE_BASE_SCHEME/ip"
     }
 }
